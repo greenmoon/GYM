@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UKK GYM Progress TC V07 2026.07.25 14:44</title>
+  <style>
+    body {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+      color: #1f2937;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    h1 { color: #111827; }
+    details {
+      margin: 16px 0;
+      padding: 14px 18px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      background: #f9fafb;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 700;
+    }
+    dt {
+      margin-top: 12px;
+      font-weight: 700;
+    }
+    dd { margin-left: 0; }
+    footer {
+      margin-top: 32px;
+      color: #6b7280;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>GYM Unknown → Known Progress</h1>
+
+  <details>
+    <summary>(007 2026-07-25 14:44) 在頁面頂端顯示完整標題與作者</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>自行車心率頁面本身未同時顯示目前標題、版本、時間標籤及作者資訊。</dd>
+      <dt>Known</dt>
+      <dd>頁面頂端單行已顯示完整目前索引標題、版本、時間標籤及 <code>Created by Kevin</code>。</dd>
+      <dt>Evidence</dt>
+      <dd><code>index.html</code> 已更新為 V03，頂端標題列與文件標題的專案名稱、版本及時間標籤一致。</dd>
+    </dl>
+  </details>
+
+  <details>
+    <summary>(006 2026-07-25 13:56) 標準化 gi 訊息及專案名稱與時間標籤對齊</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd><code>gi</code> 完成訊息未包含實際發布頁面標題，也未明確要求專案名稱、版本與時間標籤保持一致。</dd>
+      <dt>Known</dt>
+      <dd><code>gi</code> 必須顯示 <code>GI&gt; [完整目前發布索引標題] completed</code>；其中專案名稱、版本及時間標籤必須與實際發布的 <code>index.html</code> 標題完全一致。</dd>
+      <dt>Evidence</dt>
+      <dd><code>AGENTS.md</code> 已新增 LI/GI 標題對齊規則，並更新 <code>gi</code> 縮寫說明及範例。</dd>
+    </dl>
+  </details>
+
+  <details>
+    <summary>(005 2026-07-25 13:53) 標準化 li 完成訊息格式</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd><code>li</code> 本機索引流程完成後的訊息缺少固定前綴，無法快速確認執行類型與實際頁面標題。</dd>
+      <dt>Known</dt>
+      <dd><code>li</code> 完成訊息必須使用 <code>LI&gt; [完整目前索引標題] completed</code> 格式。</dd>
+      <dt>Evidence</dt>
+      <dd><code>AGENTS.md</code> 的 <code>li</code> 縮寫規則已加入固定格式與範例。</dd>
+    </dl>
+  </details>
+
+  <details>
+    <summary>(004 2026-07-25 13:52) 依心率增減方向套用彩虹色序</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>不同目標心率值尚未提供可立即辨識增減方向的顏色變化。</dd>
+      <dt>Known</dt>
+      <dd>85–110 BPM 已映射至紅色到紫色的連續彩虹色序；數值增加時依彩虹順序前進，數值下降時依相同映射自動反向。</dd>
+      <dt>Evidence</dt>
+      <dd><code>rainbowColor()</code> 將 85 BPM 映射為 0° 色相、110 BPM 映射為 270° 色相，並同步更新大型數字、光暈及面板邊框。</dd>
+    </dl>
+  </details>
+
+  <details>
+    <summary>(003 2026-07-25 13:51) 建立自行車三循環心率引導顯示</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>GYM 專案尚未有適用於 iPhone 橫向顯示、可依時間線性提示目標心率的自行車運動頁面。</dd>
+      <dt>Known</dt>
+      <dd>本機索引頁已實作每循環五分鐘的 85→110→85 BPM 線性曲線：前 3 分 30 秒上升、後 1 分 30 秒下降，共三循環、15 分鐘，最後自動停止並顯示 <code>DONE</code>。</dd>
+      <dt>Evidence</dt>
+      <dd>計算檢查確認 0、210、300 秒分別為 85、110、85 BPM；本機伺服器已成功提供頁面並在 Google Chrome 開啟。</dd>
+    </dl>
+  </details>
+
+  <details>
+    <summary>(002 2026-07-25 13:41) 將 uu 縮寫重新命名為 gi</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>全球索引網址發布流程仍使用不易辨識的 <code>uu</code> 縮寫，且完成提示不夠明確。</dd>
+      <dt>Known</dt>
+      <dd>此流程已改用 <code>gi</code>（Global Index URL Upload）；完成並開啟線上索引頁後，必須顯示完全相同的 <code>GI&gt; completed</code> 提示。</dd>
+      <dt>Evidence</dt>
+      <dd><code>AGENTS.md</code> 的縮寫表已移除 <code>uu</code> 並加入 <code>gi</code> 規則。</dd>
+    </dl>
+  </details>
+
+  <details>
+    <summary>(001 2026-07-25 13:36) 建立 kk 縮寫與 UKK 記錄檔</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>GYM 專案尚未定義可手動觸發 UKK 記錄的縮寫，且 UKK HTML 檔案不存在。</dd>
+      <dt>Known</dt>
+      <dd><code>kk</code> 已定義為新增 Unknown → Known 記錄的命令；缺少 <code>doc/</code> 或 UKK HTML 時會自動建立。</dd>
+      <dt>Evidence</dt>
+      <dd><code>AGENTS.md</code> 已加入 <code>kk</code> 規則，並建立 <code>doc/UKK_GYM_PROGRESS_TC.html</code>。</dd>
+    </dl>
+  </details>
+
+  <footer>UKK GYM Progress TC V07 2026.07.25 14:44</footer>
+</body>
+</html>
