@@ -15,9 +15,9 @@ def main() -> None:
         shutil.rmtree(DIST)
 
     ASSETS.mkdir(parents=True)
-    shutil.copy2(ROOT / "index.html", ASSETS / "index.html")
-    shutil.copy2(ROOT / "styles.css", ASSETS / "styles.css")
-    shutil.copy2(ROOT / "app.js", ASSETS / "app.js")
+    for filename in ("index.html", "styles.css", "app.js", "manifest.webmanifest"):
+        shutil.copy2(ROOT / filename, ASSETS / filename)
+    shutil.copytree(ROOT / "assets", ASSETS / "assets")
     (DIST / "server").mkdir()
     shutil.copy2(ROOT / "worker" / "index.js", DIST / "server" / "index.js")
     print(f"Built {DIST}")

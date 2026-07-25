@@ -1,0 +1,22 @@
+{
+  "name": "GYM Bicycle Heart Rate",
+  "short_name": "GYM",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#07110e",
+  "theme_color": "#07110e",
+  "icons": [
+    {
+      "src": "assets/gym-icon-180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/gym-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
