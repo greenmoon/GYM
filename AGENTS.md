@@ -68,12 +68,13 @@ For the GYM bicycle exercise index:
 
 1. Optimize the display for an iPhone in landscape orientation.
 2. Make the target heart-rate number the dominant element, occupying approximately 60% of the usable display.
-3. Treat the requested `85..110 bps` range as `85..110 BPM` (beats per minute).
-4. During each five-minute cycle, increase the target linearly from 85 BPM at `00:00` to 110 BPM at `03:30`, then decrease it linearly to 85 BPM at `05:00`.
-5. Run exactly three cycles for a total of 15 minutes.
-6. After the third cycle, stop automatically and alert the user with `DONE`.
+3. Use a 90–110 BPM target range (beats per minute).
+4. During each five-minute cycle, increase the target linearly from 90 BPM at `00:00` to 110 BPM at `03:30`, then decrease it linearly to 90 BPM at `05:00`.
+5. Provide C1, C2, and C3 controls to select one, two, or three maximum cycles; default to C2 (10 minutes).
+6. After the selected final cycle, stop automatically and alert the user with `DONE`.
 7. Color the large heart-rate value in rainbow order by BPM: increasing values move from red toward violet, while decreasing values reverse from violet toward red.
 8. Show the full current index title, version, time tag, and `Created by Kevin` together on the top line of the display.
+9. When a workout is running, change the START control to a contrasting active color so its active state is obvious.
 
 ## Auto UKK progress record rule
 
@@ -110,9 +111,6 @@ The user often uses short abbreviation commands. Interpret them as task modifier
 | `ee` | Enhancement English. Before answering the request, show the user's command verbatim under `raw>`, an improved English version under `betterEng>`, and a Traditional Chinese version under `tc>`. Then answer the actual request. |
 | `li` | Local Index HTML. Automatically run the complete local workflow: build Python -> local HTML -> open the local `index.html` for checking. After opening it, show `LI> ` followed by the full current index title and ` completed`. Example: `LI> GYM Bicycle Heart Rate V01 2026.07.25 13:51 completed`. |
 | `gi` | Global Index URL Upload. Automatically run the complete workflow: build Python -> HTML -> push to the project repository -> publish the worldwide URL -> open the published repository `index.html` for checking. After opening it, show `GI> ` followed by the full current published index title and ` completed`. The project name, version, and time tag must exactly match that index title. Example: `GI> GYM Bicycle Heart Rate V01 2026.07.25 13:51 completed`. |
-| `uunx` | Upload URL with number of x times 'y', Automatic run whole process built py->html->push->repo project->world wide URL, auto open repo index.html for checking |
-| `uc xxxxxx` | Update Code to local, `authorized_code/code.txt` to `xxxxxx` in local folder only, commit, push to repo project, and open URL. Example: `uc 112358`. |
-| `uc` | Update Code to repo, authorized code from local `authorized_code/code.txt`, commit, push, and open URL. local->repo|
 
 ## Interpretation examples
 

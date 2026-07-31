@@ -9,13 +9,13 @@
   <meta name="apple-mobile-web-app-title" content="GYM">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/gym-icon-180.png">
   <link rel="manifest" href="manifest.webmanifest">
-  <title>GYM Bicycle Heart Rate V05 2026.07.25 16:11</title>
+  <title>GYM Bicycle Heart Rate V07 2026.08.01 07:19</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="app" aria-labelledby="app-title">
     <header class="status-bar">
-      <h1 id="app-title" class="title-line">GYM Bicycle Heart Rate V05 2026.07.25 16:11 <span>· Created by Kevin</span></h1>
+      <h1 id="app-title" class="title-line">GYM Bicycle Heart Rate V07 2026.08.01 07:19 <span>· Created by Kevin</span></h1>
       <div class="cycle-badge" aria-live="polite">
         <span>Cycle</span>
         <strong id="cycle-count">1 / 3</strong>
@@ -25,7 +25,7 @@
     <section class="heart-panel" aria-label="Target heart rate">
       <div class="heart-mark" aria-hidden="true">♥</div>
       <div class="rate-wrap">
-        <output id="heart-rate" class="heart-rate" aria-live="polite">85</output>
+        <output id="heart-rate" class="heart-rate" aria-live="polite">90</output>
         <span class="unit">BPM</span>
       </div>
       <p id="phase-label" class="phase-label">READY · RAMP UP</p>
@@ -46,13 +46,22 @@
         <button id="start-button" class="primary-button" type="button">START</button>
         <button id="reset-button" class="secondary-button" type="button">RESET</button>
       </div>
+
+      <div class="cycle-selector" role="group" aria-label="Maximum workout cycles">
+        <span class="time-label">Max cycles</span>
+        <div class="cycle-options">
+          <button class="cycle-option" type="button" data-cycles="1" aria-pressed="false">C1</button>
+          <button class="cycle-option is-selected" type="button" data-cycles="2" aria-pressed="true">C2</button>
+          <button class="cycle-option" type="button" data-cycles="3" aria-pressed="false">C3</button>
+        </div>
+      </div>
     </section>
 
     <div id="done-overlay" class="done-overlay" role="alertdialog" aria-modal="true" aria-labelledby="done-title" hidden>
       <div class="done-card">
         <p class="eyebrow">WORKOUT COMPLETE</p>
         <h2 id="done-title">DONE</h2>
-        <p>3 cycles · 15 minutes</p>
+        <p id="done-summary">2 cycles · 10 minutes</p>
         <button id="done-reset-button" class="primary-button" type="button">AGAIN</button>
       </div>
     </div>

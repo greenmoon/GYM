@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UKK GYM Progress TC V11 2026.07.25 16:11</title>
+  <title>UKK GYM Progress TC V14 2026.08.01 07:19</title>
   <style>
     body {
       max-width: 900px;
@@ -39,6 +39,42 @@
 </head>
 <body>
   <h1>GYM Unknown → Known Progress</h1>
+
+  <details>
+    <summary>(014 2026-08-01 07:19) 調整心率循環下限為 90 BPM</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>自行車心率循環仍使用 85→110→85 BPM 的上下界。</dd>
+      <dt>Known</dt>
+      <dd>每個五分鐘循環現在為線性的 90→110→90 BPM：00:00 為 90、03:30 為 110、05:00 回到 90。</dd>
+      <dt>Evidence</dt>
+      <dd><code>MIN_BPM</code> 已更新為 90，心率規則、初始畫面與彩虹色域映射均使用新的 90–110 BPM 範圍。</dd>
+    </dl>
+  </details>
+
+  <details>
+    <summary>(013 2026-08-01 07:14) 新增啟動辨識色與可選最大循環數</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>開始訓練時的按鈕狀態不夠明顯，且最大循環數固定為三個循環。</dd>
+      <dt>Known</dt>
+      <dd>開始後 START 控制會變為橘色的 PAUSE 狀態；C1、C2、C3 可在開始前選擇最大循環數，預設為 C2（10 分鐘）。</dd>
+      <dt>Evidence</dt>
+      <dd>計時總長度、循環顯示與完成摘要均依選取的最大循環數動態更新；開始後必須 RESET 才能變更選擇。</dd>
+    </dl>
+  </details>
+
+  <details>
+    <summary>(012 2026-08-01 07:08) 移除未使用的縮寫指令</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>縮寫表仍包含不再使用的 <code>uunx</code>、<code>uc xxxxxx</code> 與 <code>uc</code> 指令。</dd>
+      <dt>Known</dt>
+      <dd>這三項縮寫規則已從 GYM 專案的 <code>AGENTS.md</code> 移除。</dd>
+      <dt>Evidence</dt>
+      <dd>縮寫表現在只保留目前有效的本機、全球發布及其他工作流程指令。</dd>
+    </dl>
+  </details>
 
   <details>
     <summary>(011 2026-07-25 16:11) 新增獨立 GYM App 自訂圖示</summary>
@@ -172,6 +208,6 @@
     </dl>
   </details>
 
-  <footer>UKK GYM Progress TC V11 2026.07.25 16:11</footer>
+  <footer>UKK GYM Progress TC V14 2026.08.01 07:19</footer>
 </body>
 </html>

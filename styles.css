@@ -234,6 +234,13 @@ button {
   border: 0;
   background: var(--green);
   color: #06110c;
+  transition: background 180ms ease, color 180ms ease, box-shadow 180ms ease;
+}
+
+.primary-button.is-running {
+  background: #ff9d3d;
+  color: #241000;
+  box-shadow: 0 0 26px rgba(255, 157, 61, 0.38);
 }
 
 .secondary-button {
@@ -243,8 +250,43 @@ button {
   color: var(--text);
 }
 
+.cycle-selector {
+  display: grid;
+  gap: 8px;
+}
+
+.cycle-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.cycle-option {
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
+}
+
+.cycle-option.is-selected {
+  border-color: var(--green);
+  background: rgba(121, 255, 173, 0.16);
+  color: var(--green);
+}
+
+.cycle-option:disabled {
+  cursor: not-allowed;
+  opacity: 0.42;
+}
+
 .primary-button:focus-visible,
-.secondary-button:focus-visible {
+.secondary-button:focus-visible,
+.cycle-option:focus-visible {
   outline: 3px solid white;
   outline-offset: 3px;
 }

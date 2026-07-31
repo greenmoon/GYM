@@ -3,9 +3,7 @@
 
   const CYCLE_SECONDS = 300;
   const RISE_SECONDS = 210;
-  const TOTAL_CYCLES = 3;
-  const TOTAL_SECONDS = CYCLE_SECONDS * TOTAL_CYCLES;
-  const MIN_BPM = 85;
+  const MIN_BPM = 90;
   const MAX_BPM = 110;
 
   const elements = {
@@ -16,8 +14,10 @@
     progressFill: document.querySelector("#progress-fill"),
     startButton: document.querySelector("#start-button"),
     resetButton: document.querySelector("#reset-button"),
+    cycleOptions: [...document.querySelectorAll(".cycle-option")],
     doneOverlay: document.querySelector("#done-overlay"),
     doneResetButton: document.querySelector("#done-reset-button"),
+    doneSummary: document.querySelector("#done-summary"),
   };
 
   let elapsedBeforeStart = 0;
@@ -25,6 +25,7 @@
   let animationFrame = null;
   let running = false;
   let finished = false;
+  let maxCycles = 2;
   let audioContext = null;
 
   function targetBpm(cycleSecond) {
@@ -55,19 +56,41 @@
     return running ? elapsedBeforeStart + (now - startedAt) / 1000 : elapsedBeforeStart;
   }
 
+  function totalSeconds() {
+    return CYCLE_SECONDS * maxCycles;
+  }
+
+  function updateCycleControls() {
+    const locked = running || elapsedBeforeStart > 0 || finished;
+    elements.cycleOptions.forEach((option) => {
+      const selected = Number(option.dataset.cycles) === maxCycles;
+      option.classList.toggle("is-selected", selected);
+      option.setAttribute("aria-pressed", String(selected));
+      option.disabled = locked;
+    });
+  }
+
+  function selectCycles(cycles) {
+    if (running || elapsedBeforeStart > 0 || finished) return;
+    maxCycles = cycles;
+    updateCycleControls();
+    render(0);
+  }
+
   function render(elapsed) {
-    const boundedElapsed = Math.min(elapsed, TOTAL_SECONDS);
-    const cycleIndex = Math.min(Math.floor(boundedElapsed / CYCLE_SECONDS), TOTAL_CYCLES - 1);
-    const cycleSecond = boundedElapsed === TOTAL_SECONDS
+    const workoutSeconds = totalSeconds();
+    const boundedElapsed = Math.min(elapsed, workoutSeconds);
+    const cycleIndex = Math.min(Math.floor(boundedElapsed / CYCLE_SECONDS), maxCycles - 1);
+    const cycleSecond = boundedElapsed === workoutSeconds
       ? CYCLE_SECONDS
       : boundedElapsed % CYCLE_SECONDS;
-    const bpm = boundedElapsed === TOTAL_SECONDS ? MIN_BPM : targetBpm(cycleSecond);
+    const bpm = boundedElapsed === workoutSeconds ? MIN_BPM : targetBpm(cycleSecond);
     const rising = cycleSecond <= RISE_SECONDS;
 
     const roundedBpm = Math.round(bpm);
     document.documentElement.style.setProperty("--rate-color", rainbowColor(roundedBpm));
     elements.heartRate.value = roundedBpm;
-    elements.cycleCount.textContent = `${cycleIndex + 1} / ${TOTAL_CYCLES}`;
+    elements.cycleCount.textContent = `${cycleIndex + 1} / ${maxCycles}`;
     elements.cycleTime.value = `${formatTime(cycleSecond)} / 05:00`;
     elements.progressFill.style.width = `${(cycleSecond / CYCLE_SECONDS) * 100}%`;
     elements.phaseLabel.textContent = finished
@@ -77,7 +100,7 @@
 
   function tick(now) {
     const elapsed = currentElapsed(now);
-    if (elapsed >= TOTAL_SECONDS) {
+    if (elapsed >= totalSeconds()) {
       completeWorkout();
       return;
     }
@@ -115,11 +138,14 @@
   function completeWorkout() {
     running = false;
     finished = true;
-    elapsedBeforeStart = TOTAL_SECONDS;
+    elapsedBeforeStart = totalSeconds();
     cancelAnimationFrame(animationFrame);
-    render(TOTAL_SECONDS);
+    render(totalSeconds());
     elements.startButton.textContent = "START";
+    elements.startButton.classList.remove("is-running");
+    elements.doneSummary.textContent = `${maxCycles} ${maxCycles === 1 ? "cycle" : "cycles"} · ${maxCycles * 5} minutes`;
     elements.doneOverlay.hidden = false;
+    updateCycleControls();
     playDoneAlert();
   }
 
@@ -132,13 +158,17 @@
       running = false;
       cancelAnimationFrame(animationFrame);
       elements.startButton.textContent = "RESUME";
+      elements.startButton.classList.remove("is-running");
       render(elapsedBeforeStart);
+      updateCycleControls();
       return;
     }
 
     running = true;
     startedAt = performance.now();
     elements.startButton.textContent = "PAUSE";
+    elements.startButton.classList.add("is-running");
+    updateCycleControls();
     animationFrame = requestAnimationFrame(tick);
   }
 
@@ -148,22 +178,29 @@
     elapsedBeforeStart = 0;
     cancelAnimationFrame(animationFrame);
     elements.startButton.textContent = "START";
+    elements.startButton.classList.remove("is-running");
     elements.doneOverlay.hidden = true;
+    updateCycleControls();
     render(0);
   }
 
   elements.startButton.addEventListener("click", toggleRunning);
   elements.resetButton.addEventListener("click", resetWorkout);
   elements.doneResetButton.addEventListener("click", resetWorkout);
+  elements.cycleOptions.forEach((option) => {
+    option.addEventListener("click", () => selectCycles(Number(option.dataset.cycles)));
+  });
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden && running) render(currentElapsed());
   });
 
   window.GymTimer = {
-    constants: { CYCLE_SECONDS, RISE_SECONDS, TOTAL_CYCLES, TOTAL_SECONDS, MIN_BPM, MAX_BPM },
+    constants: { CYCLE_SECONDS, RISE_SECONDS, MIN_BPM, MAX_BPM },
+    totalSeconds,
     targetBpm,
     rainbowColor,
   };
 
+  updateCycleControls();
   render(0);
 })();
