@@ -2,12 +2,15 @@
   "use strict";
 
   const CYCLE_SECONDS = 300;
-  const RISE_SECONDS = 210;
+  const RISE_SECONDS = 180;
+  const RECOVERY_SECONDS = 60;
+  const COUNTDOWN_START_SECONDS = RISE_SECONDS + RECOVERY_SECONDS;
   const MIN_BPM = 90;
   const MAX_BPM = 110;
 
   const elements = {
     heartRate: document.querySelector("#heart-rate"),
+    rateUnit: document.querySelector("#rate-unit"),
     phaseLabel: document.querySelector("#phase-label"),
     cycleCount: document.querySelector("#cycle-count"),
     cycleTime: document.querySelector("#cycle-time"),
@@ -34,8 +37,12 @@
       return MIN_BPM + (MAX_BPM - MIN_BPM) * progress;
     }
 
-    const progress = (cycleSecond - RISE_SECONDS) / (CYCLE_SECONDS - RISE_SECONDS);
+    const progress = (cycleSecond - RISE_SECONDS) / RECOVERY_SECONDS;
     return MAX_BPM - (MAX_BPM - MIN_BPM) * progress;
+  }
+
+  function countdownSeconds(cycleSecond) {
+    return Math.max(0, Math.ceil(CYCLE_SECONDS - cycleSecond) - 1);
   }
 
   function rainbowColor(bpm) {
@@ -84,18 +91,20 @@
     const cycleSecond = boundedElapsed === workoutSeconds
       ? CYCLE_SECONDS
       : boundedElapsed % CYCLE_SECONDS;
+    const isCountdown = cycleSecond >= COUNTDOWN_START_SECONDS;
     const bpm = boundedElapsed === workoutSeconds ? MIN_BPM : targetBpm(cycleSecond);
-    const rising = cycleSecond <= RISE_SECONDS;
-
     const roundedBpm = Math.round(bpm);
+    const displayedValue = isCountdown ? countdownSeconds(cycleSecond) : roundedBpm;
+
     document.documentElement.style.setProperty("--rate-color", rainbowColor(roundedBpm));
-    elements.heartRate.value = roundedBpm;
+    elements.heartRate.value = displayedValue;
+    elements.rateUnit.textContent = isCountdown ? "SEC" : "BPM";
     elements.cycleCount.textContent = `${cycleIndex + 1} / ${maxCycles}`;
     elements.cycleTime.value = `${formatTime(cycleSecond)} / 05:00`;
     elements.progressFill.style.width = `${(cycleSecond / CYCLE_SECONDS) * 100}%`;
     elements.phaseLabel.textContent = finished
       ? "COMPLETE"
-      : `${running ? "RIDE" : "READY"} · ${rising ? "RAMP UP" : "RECOVER"}`;
+      : `${running ? "RIDE" : "READY"} · ${isCountdown ? "COUNTDOWN" : cycleSecond <= RISE_SECONDS ? "RAMP UP" : "RECOVER"}`;
   }
 
   function tick(now) {
@@ -195,9 +204,10 @@
   });
 
   window.GymTimer = {
-    constants: { CYCLE_SECONDS, RISE_SECONDS, MIN_BPM, MAX_BPM },
+    constants: { CYCLE_SECONDS, RISE_SECONDS, RECOVERY_SECONDS, COUNTDOWN_START_SECONDS, MIN_BPM, MAX_BPM },
     totalSeconds,
     targetBpm,
+    countdownSeconds,
     rainbowColor,
   };
 
