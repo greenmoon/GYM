@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UKK GYM Progress TC V15 2026.08.21 19:43</title>
+  <title>UKK GYM Progress TC V16 2026.09.30 22:55</title>
   <style>
     body {
       max-width: 900px;
@@ -39,6 +39,18 @@
 </head>
 <body>
   <h1>GYM Unknown → Known Progress</h1>
+
+  <details>
+    <summary>(016 2026-09-30 22:55) 將五分鐘循環調整為 2 分鐘上升、1 分鐘恢復與 2 分鐘倒數</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>新版訓練節奏需要在每五分鐘循環中更早完成心率恢復，並保留兩分鐘倒數。</dd>
+      <dt>Known</dt>
+      <dd>每循環目前依序顯示 00:00–02:00 的 90→110 BPM、02:00–03:00 的 110→90 BPM，以及 03:00–05:00 的 119→0 秒倒數。</dd>
+      <dt>Evidence</dt>
+      <dd><code>RISE_SECONDS</code> 為 120、<code>RECOVERY_SECONDS</code> 為 60，倒數從第 180 秒開始；V09 的文件標題與頁面頂端標題完全一致。</dd>
+    </dl>
+  </details>
 
   <details>
     <summary>(015 2026-08-21 19:43) 將每個循環改為三段式心率與倒數</summary>
@@ -220,6 +232,6 @@
     </dl>
   </details>
 
-  <footer>UKK GYM Progress TC V15 2026.08.21 19:43</footer>
+  <footer>UKK GYM Progress TC V16 2026.09.30 22:55</footer>
 </body>
 </html>
