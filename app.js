@@ -5,7 +5,7 @@
   const RISE_SECONDS = 120;
   const RECOVERY_SECONDS = 60;
   const COUNTDOWN_START_SECONDS = RISE_SECONDS + RECOVERY_SECONDS;
-  const MIN_BPM = 90;
+  const MIN_BPM = 85;
   const MAX_BPM = 110;
 
   const elements = {

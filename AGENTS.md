@@ -68,8 +68,8 @@ For the GYM bicycle exercise index:
 
 1. Optimize the display for an iPhone in landscape orientation.
 2. Make the target heart-rate number the dominant element, occupying approximately 60% of the usable display.
-3. Use a 90–110 BPM target range (beats per minute).
-4. During each five-minute cycle, use three linear display steps: 90→110 BPM at `00:00–02:00`, 110→90 BPM at `02:00–03:00`, then a 119→0 seconds countdown at `03:00–05:00`.
+3. Use an 85–110 BPM target range (beats per minute).
+4. During each five-minute cycle, use three linear display steps: 85→110 BPM at `00:00–02:00`, 110→85 BPM at `02:00–03:00`, then a 119→0 seconds countdown at `03:00–05:00`.
 5. Provide C1, C2, and C3 controls to select one, two, or three maximum cycles; default to C2 (10 minutes).
 6. After the selected final cycle, stop automatically and alert the user with `DONE`.
 7. Color the large heart-rate value in rainbow order by BPM: increasing values move from red toward violet, while decreasing values reverse from violet toward red.

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UKK GYM Progress TC V17 2026.09.30 23:46</title>
+  <title>UKK GYM Progress TC V18 2026.10.07 20:19</title>
   <style>
     body {
       max-width: 900px;
@@ -39,6 +39,18 @@
 </head>
 <body>
   <h1>GYM Unknown → Known Progress</h1>
+
+  <details>
+    <summary>(018 2026-10-07 20:19) 將 V10 心率起始與恢復下限調整為 85 BPM</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>兩分鐘上升階段需要從 85 BPM 起始，而非 90 BPM。</dd>
+      <dt>Known</dt>
+      <dd>V10 每循環依序為 00:00–02:00 的 85→110 BPM、02:00–03:00 的 110→85 BPM，以及 03:00–05:00 的 119→0 秒倒數。</dd>
+      <dt>Evidence</dt>
+      <dd><code>MIN_BPM</code> 與初始顯示均更新為 85；彩虹色域會以 85–110 BPM 作為完整映射範圍。</dd>
+    </dl>
+  </details>
 
   <details>
     <summary>(017 2026-09-30 23:46) 建立可離線分享的 V09 QR Code</summary>
@@ -244,6 +256,6 @@
     </dl>
   </details>
 
-  <footer>UKK GYM Progress TC V17 2026.09.30 23:46</footer>
+  <footer>UKK GYM Progress TC V18 2026.10.07 20:19</footer>
 </body>
 </html>
