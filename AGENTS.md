@@ -100,6 +100,8 @@ The user often uses short abbreviation commands. Interpret them as task modifier
 |---|---|
 | `go` | Read `AGENTS.md` first, then perform the requested work using the current project rules and handoff flow. |
 | `autorun` | Implement and run the already-discussed solution automatically. Run suitable project code, verify it, and open the completed HTML in Google Chrome. Continue autonomously except when a physical man-in-loop action is required. |
+| `cc` | Keep this MacBook awake in the background for the default 2 hours using `caffeinate -i -t 7200`, then confirm the process is running. |
+| `ccN` | Keep this MacBook awake in the background for `N` hours. `N` must be a positive whole number. Example: `cc5` runs `caffeinate -i -t 18000`, then confirms the process is running. |
 | `tc` | Reply in Traditional Chinese. |
 | `en` | Reply in English. |
 | `dd` | Deep Dive, Give detailed explanation |
