@@ -9,20 +9,20 @@
   <meta name="apple-mobile-web-app-title" content="GYM Pull-up">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/gym-icon-180.png">
   <link rel="manifest" href="manifest.webmanifest">
-  <title>GYM Pull-up Trainer V01 2026.10.14 20:43</title>
+  <title>GYM Pull-up Trainer V07 2026.10.14 21:25</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="app" aria-labelledby="app-title">
     <header class="status-bar">
-      <h1 id="app-title">GYM Pull-up Trainer V01 2026.10.14 20:43 <span>· Created by Kevin</span></h1>
+      <h1 id="app-title">GYM Pull-up Trainer V07 2026.10.14 21:25 <span>· Created by Kevin</span></h1>
       <strong id="formula" class="formula">4 × 4 = 16 MIN</strong>
     </header>
 
     <section id="phase-panel" class="display-panel phase-panel" aria-label="目前階段倒數">
       <p id="phase-label" class="panel-label">READY</p>
-      <output id="phase-time" class="big-time" aria-live="polite">02:00</output>
-      <p id="split-label" class="panel-note">N1 WORK 2 MIN</p>
+      <output id="phase-time" class="big-time" aria-live="polite">01:30</output>
+      <p id="split-label" class="panel-note">N1 WORK 1.5 MIN</p>
     </section>
 
     <section class="display-panel total-panel" aria-label="訓練總進度">
@@ -38,15 +38,15 @@
         <output id="n-value">4</output><em>MIN</em>
         <button type="button" data-adjust="n" data-delta="1" aria-label="增加每循環分鐘">＋</button>
       </div>
-      <div class="setting" data-setting="n1">
-        <span>N1 · WORK</span>
+      <div id="work-setting" class="setting work-setting" data-setting="n1">
+        <span id="work-setting-label">N1 · WORK</span>
         <button type="button" data-adjust="n1" data-delta="-0.5" aria-label="減少運動時間">−</button>
-        <output id="n1-value">2</output><em>MIN</em>
+        <output id="n1-value">1.5</output><em>MIN</em>
         <button type="button" data-adjust="n1" data-delta="0.5" aria-label="增加運動時間">＋</button>
       </div>
-      <div class="setting fixed-setting">
-        <span>N2 · REST</span>
-        <output id="n2-value">2</output><em>MIN</em>
+      <div id="rest-setting" class="setting fixed-setting rest-setting">
+        <span id="rest-setting-label">N2 · REST</span>
+        <output id="n2-value">2.5</output><em>MIN</em>
       </div>
       <div class="setting" data-setting="m">
         <span>M · CYCLES</span>

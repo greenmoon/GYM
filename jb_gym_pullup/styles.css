@@ -6,7 +6,9 @@
   --muted: #94b7aa;
   --green: #65ff9c;
   --blue: #5cc8ff;
+  --rest-gray: #a7b0ad;
   --orange: #ff9d3d;
+  --work-red: #ff5f6d;
   --line: rgba(255,255,255,.14);
 }
 * { box-sizing: border-box; }
@@ -43,8 +45,15 @@ button { font: inherit; }
 .setting button { min-width: 34px; min-height: 32px; border: 1px solid var(--line); border-radius: 9px; background: rgba(255,255,255,.06); color: var(--text); font-weight: 950; }
 .setting output { justify-self: end; font-size: clamp(1.15rem,2.7vw,1.8rem); font-weight: 950; font-variant-numeric: tabular-nums; }
 .setting em { color: var(--muted); font-size: .62rem; font-style: normal; font-weight: 850; }
+.work-setting { transition: border-color .18s, background .18s, box-shadow .18s; }
+.work-setting output { color: var(--work-red); }
+.work-setting.is-active { border-color: var(--green); background: rgba(101,255,156,.12); box-shadow: 0 0 18px rgba(101,255,156,.16); }
+.work-setting.is-active > span { color: var(--green); }
 .fixed-setting { grid-template-columns: 1fr auto auto; }
-.fixed-setting output { color: var(--blue); }
+.fixed-setting output { color: var(--rest-gray); }
+.rest-setting { transition: border-color .18s, background .18s, box-shadow .18s; }
+.rest-setting.is-active { border-color: var(--rest-gray); background: rgba(167,176,173,.14); box-shadow: 0 0 18px rgba(167,176,173,.18); }
+.rest-setting.is-active > span { color: var(--rest-gray); }
 .button-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; }
 .primary-button,.secondary-button { min-height: 100%; border-radius: 13px; font-weight: 950; letter-spacing: .08em; }
 .primary-button { border: 0; background: var(--green); color: #04100a; }

@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>QA Digest GYM Pull-up Progress EN-TC V08 2026.10.14 21:25</title>
+  <style>
+    body { max-width: 1100px; margin: 40px auto; padding: 0 20px; color: #1f2937; font-family: system-ui, sans-serif; line-height: 1.55; }
+    details { margin: 16px 0; padding: 14px 18px; border: 1px solid #d1d5db; border-radius: 10px; background: #f9fafb; }
+    summary { cursor: pointer; font-weight: 700; }
+    table { width: 100%; margin-top: 14px; border-collapse: collapse; table-layout: fixed; }
+    th, td { padding: 10px 12px; border: 1px solid #d1d5db; vertical-align: top; text-align: left; }
+    thead th { background: #e5e7eb; }
+    tbody th { width: 72px; background: #f3f4f6; }
+    footer { margin-top: 32px; color: #6b7280; font-size: .9rem; }
+    code { overflow-wrap: anywhere; }
+  </style>
+</head>
+<body>
+  <h1>GYM Pull-up QA Digest Daily · English／繁體中文</h1>
+
+  <details>
+    <summary>(008 2026-10-14 21:25) Correct the work-period name to N1／運動時段名稱更正為 N1</summary>
+    <table>
+      <thead><tr><th>Item</th><th lang="en">English</th><th lang="zh-Hant">繁體中文</th></tr></thead>
+      <tbody>
+        <tr><th>Q</th><td lang="en">What is the correct name for the 1 minute 30 second work period?</td><td lang="zh-Hant">1 分 30 秒的運動時段正確名稱是什麼？</td></tr>
+        <tr><th>A</th><td lang="en">The correct name is N1, not M1. The 1.5-minute default and red number remain unchanged.</td><td lang="zh-Hant">正確名稱是 N1，不是 M1；1.5 分鐘預設值與紅色數字維持不變。</td></tr>
+        <tr><th>Check</th><td lang="en">The active UI, HTML identifiers, and JavaScript settings now use <code>N1/n1</code>; N2 remains <code>N - N1</code>.</td><td lang="zh-Hant">目前介面、HTML 識別碼與 JavaScript 設定已改回 <code>N1/n1</code>；N2 仍為 <code>N - N1</code>。</td></tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details>
+    <summary>(007 2026-10-14 21:24) Rename the work period to M1 and use red／運動時段改稱 M1 並使用紅色</summary>
+    <table>
+      <thead><tr><th>Item</th><th lang="en">English</th><th lang="zh-Hant">繁體中文</th></tr></thead>
+      <tbody>
+        <tr><th>Q</th><td lang="en">How should the corrected M1 work period show a default of 1 minute 30 seconds and remain visually distinct?</td><td lang="zh-Hant">更正後的 M1 運動時段應如何顯示預設 1 分 30 秒，並保持清楚的視覺區別？</td></tr>
+        <tr><th>A</th><td lang="en">Pull-up Trainer V06 renames the work period from N1 to M1, defaults it to 1.5 minutes, and displays its setting value in red.</td><td lang="zh-Hant">Pull-up Trainer V06 將運動時段由 N1 改稱 M1，預設為 1.5 分鐘，並將設定數值顯示為紅色。</td></tr>
+        <tr><th>Check</th><td lang="en">With N=4 and M1=1.5, N2 is calculated as 2.5 minutes. The source now uses <code>settings.m1</code> and <code>--work-red</code>.</td><td lang="zh-Hant">當 N=4、M1=1.5 時，N2 自動計算為 2.5 分鐘；原始碼已改用 <code>settings.m1</code> 與 <code>--work-red</code>。</td></tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details>
+    <summary>(006 2026-10-14 21:03) Present English and Chinese in parallel／英文與中文並列</summary>
+    <table>
+      <thead><tr><th>Item</th><th lang="en">English</th><th lang="zh-Hant">繁體中文</th></tr></thead>
+      <tbody>
+        <tr><th>Q</th><td lang="en">How should the Pull-up QA Digest present English and Traditional Chinese side by side?</td><td lang="zh-Hant">Pull-up QA Digest 應如何將英文與繁體中文並列呈現？</td></tr>
+        <tr><th>A</th><td lang="en">Every entry now uses a parallel table with English on the left and Traditional Chinese on the right.</td><td lang="zh-Hant">每筆記錄現在都使用並列表格，英文置左、繁體中文置右。</td></tr>
+        <tr><th>Check</th><td lang="en">Entries 001–005 were migrated, and the project rule now requires aligned bilingual Q, A, and Check content.</td><td lang="zh-Hant">001–005 已完成轉換，專案規則也已要求 Q、A、Check 使用語意對齊的雙語內容。</td></tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details>
+    <summary>(005 2026-10-14 21:02) Convert progress records to QA Digest／將進度記錄改為 QA Digest</summary>
+    <table>
+      <thead><tr><th>Item</th><th lang="en">English</th><th lang="zh-Hant">繁體中文</th></tr></thead>
+      <tbody>
+        <tr><th>Q</th><td lang="en">How can the original Pull-up progress format become a QA Digest that is faster to scan?</td><td lang="zh-Hant">如何把 Pull-up 的原進度記錄模式改成可快速閱讀的 QA Digest？</td></tr>
+        <tr><th>A</th><td lang="en">The Pull-up progress file now uses QA Digest Daily with Q, A, and Check fields.</td><td lang="zh-Hant">Pull-up 專用進度檔已改用 QA Digest Daily，所有記錄以 Q、A 與 Check 三個欄位呈現。</td></tr>
+        <tr><th>Check</th><td lang="en">Entries 001–004 kept their stable indices and chronological order; the dedicated rules and filename were updated.</td><td lang="zh-Hant">既有 001–004 保留原編號與時間順序；專用規則與檔名均已更新。</td></tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details>
+    <summary>(004 2026-10-14 21:02) Default N1 to one minute and calculate N2／N1 預設 1 分鐘並計算 N2</summary>
+    <table>
+      <thead><tr><th>Item</th><th lang="en">English</th><th lang="zh-Hant">繁體中文</th></tr></thead>
+      <tbody>
+        <tr><th>Q</th><td lang="en">How should the default N1 meet the one-minute work requirement when it was still two minutes?</td><td lang="zh-Hant">預設 N1 仍為 2 分鐘時，如何符合每個循環先運動 1 分鐘的需求？</td></tr>
+        <tr><th>A</th><td lang="en">Pull-up Trainer V05 defaults N1 to one minute. N2 remains N minus N1, so N2 is three minutes when N is four.</td><td lang="zh-Hant">Pull-up Trainer V05 將 N1 預設為 1 分鐘；N2 持續由大 N 減去 N1，因此預設 N=4 時 N2=3 分鐘。</td></tr>
+        <tr><th>Check</th><td lang="en">The initial settings are <code>{ n: 4, n1: 1, m: 4 }</code>, and <code>n2Minutes()</code> returns <code>settings.n - settings.n1</code>.</td><td lang="zh-Hant">初始設定為 <code>{ n: 4, n1: 1, m: 4 }</code>，且 <code>n2Minutes()</code> 回傳 <code>settings.n - settings.n1</code>。</td></tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details>
+    <summary>(003 2026-10-14 21:01) Mark N2 as resting／N2 動態標示休息中</summary>
+    <table>
+      <thead><tr><th>Item</th><th lang="en">English</th><th lang="zh-Hant">繁體中文</th></tr></thead>
+      <tbody>
+        <tr><th>Q</th><td lang="en">How can the N2 area clearly show when the timer is in the rest phase?</td><td lang="zh-Hant">N2 設定區如何直接顯示目前是否正處於休息階段？</td></tr>
+        <tr><th>A</th><td lang="en">Pull-up Trainer V04 shows “N2 · 休息中” with a gray highlight only while the running timer is in N2.</td><td lang="zh-Hant">Pull-up Trainer V04 僅在計時器運行且處於 N2 階段時顯示「N2 · 休息中」並使用灰色高亮。</td></tr>
+        <tr><th>Check</th><td lang="en"><code>render()</code> controls N2 with <code>running &amp;&amp; !isWork &amp;&amp; !complete</code>; work, pause, completion, and reset return it to normal.</td><td lang="zh-Hant"><code>render()</code> 以 <code>running &amp;&amp; !isWork &amp;&amp; !complete</code> 控制 N2；運動、暫停、完成及重設時都恢復為一般顯示。</td></tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details>
+    <summary>(002 2026-10-14 21:01) Mark N1 as working／N1 動態標示運動中</summary>
+    <table>
+      <thead><tr><th>Item</th><th lang="en">English</th><th lang="zh-Hant">繁體中文</th></tr></thead>
+      <tbody>
+        <tr><th>Q</th><td lang="en">How can the N1 area clearly show when the timer is in the work phase?</td><td lang="zh-Hant">N1 設定區如何直接顯示目前是否正處於運動階段？</td></tr>
+        <tr><th>A</th><td lang="en">Pull-up Trainer V03 shows “N1 · 運動中” with a green highlight only while the running timer is in N1.</td><td lang="zh-Hant">Pull-up Trainer V03 僅在計時器運行且處於 N1 階段時顯示「N1 · 運動中」並使用綠色高亮。</td></tr>
+        <tr><th>Check</th><td lang="en"><code>render()</code> controls N1 with <code>running &amp;&amp; isWork</code>; rest, pause, completion, and reset return it to normal.</td><td lang="zh-Hant"><code>render()</code> 以 <code>running &amp;&amp; isWork</code> 控制 N1；休息、暫停、完成及重設時都恢復為一般顯示。</td></tr>
+      </tbody>
+    </table>
+  </details>
+
+  <details>
+    <summary>(001 2026-10-14 21:00) Change N2 rest time to gray／N2 休息時間改為灰色</summary>
+    <table>
+      <thead><tr><th>Item</th><th lang="en">English</th><th lang="zh-Hant">繁體中文</th></tr></thead>
+      <tbody>
+        <tr><th>Q</th><td lang="en">How can a neutral color distinguish N2 as a rest period instead of blue?</td><td lang="zh-Hant">N2 數值使用藍色時，如何以中性色彩表達休息狀態？</td></tr>
+        <tr><th>A</th><td lang="en">Pull-up Trainer V02 changes the N2 value to gray to identify it clearly as rest time.</td><td lang="zh-Hant">Pull-up Trainer V02 將 N2 數值改為灰色，明確表示該欄位是休息時間。</td></tr>
+        <tr><th>Check</th><td lang="en"><code>.fixed-setting output</code> now uses the dedicated <code>--rest-gray</code> variable; other timer colors remain unchanged.</td><td lang="zh-Hant"><code>.fixed-setting output</code> 已改用獨立的 <code>--rest-gray</code> 色彩變數；其他計時器顏色不受影響。</td></tr>
+      </tbody>
+    </table>
+  </details>
+
+  <footer>QA Digest GYM Pull-up Progress EN-TC V08 2026.10.14 21:25</footer>
+</body>
+</html>

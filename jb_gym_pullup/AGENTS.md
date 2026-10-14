@@ -38,6 +38,20 @@ For every Pull-up Trainer request, read the parent `../AGENTS.md` and this file 
 - Keep the 180×180 Apple touch icon declaration and the standalone web-app manifest working.
 - Keep the Pull-up Home Screen name distinct from Bicycle and Fascia.
 
-## Pull-up UKK record
+## Pull-up QA Digest record
 
-Use `doc/UKK_GYM_PULLUP_PROGRESS_TC.html` for future Pull-up-only Unknown → Known records. Create it automatically when the first Pull-up-only entry is required. Do not add future Pull-up implementation records to the Bicycle, Fascia, or BIKE progress files.
+Use `doc/QA_DIGEST_GYM_PULLUP_PROGRESS_EN_TC.html` as the Pull-up-only QA Digest Daily record.
+
+After completing a meaningful Pull-up investigation, implementation, test, or engineering decision:
+
+1. Add one concise QA entry automatically.
+2. Label the question `Q`, the verified answer `A`, and supporting evidence or the next verification step `Check`.
+3. Present every Q, A, and Check in parallel columns: English on the left and Traditional Chinese on the right. Keep both languages semantically aligned.
+4. Assign a stable three-digit index beginning at `001`; never renumber older entries.
+5. Format each timetag as `(NNN YYYY-MM-DD HH:mm)`.
+6. Keep entries newest first and details collapsed by default.
+7. Increment the QA Digest HTML `Vnn` and refresh its title/footer timestamp.
+8. Do not duplicate completed actions or state unverified assumptions as answers.
+9. Do not add Pull-up records to Bicycle, Fascia, BIKE, or parent GYM progress files.
+
+For Pull-up requests, interpret `kk` as adding a QA Digest entry using this format.

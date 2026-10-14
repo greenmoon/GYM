@@ -1,7 +1,7 @@
 (() => {
   "use strict";
 
-  const settings = { n: 4, n1: 2, m: 4 };
+  const settings = { n: 4, n1: 1.5, m: 4 };
   const limits = { n: [1, 7], m: [1, 5] };
   const elements = {
     app: document.querySelector(".app"),
@@ -14,7 +14,11 @@
     formula: document.querySelector("#formula"),
     nValue: document.querySelector("#n-value"),
     n1Value: document.querySelector("#n1-value"),
+    workSetting: document.querySelector("#work-setting"),
+    workSettingLabel: document.querySelector("#work-setting-label"),
     n2Value: document.querySelector("#n2-value"),
+    restSetting: document.querySelector("#rest-setting"),
+    restSettingLabel: document.querySelector("#rest-setting-label"),
     mValue: document.querySelector("#m-value"),
     adjustButtons: [...document.querySelectorAll("[data-adjust]")],
     startButton: document.querySelector("#start-button"),
@@ -82,7 +86,13 @@
     const isWork = inCycle < workSeconds() && !complete;
     const phaseEnd = isWork ? workSeconds() : cycleSeconds();
     const phaseRemaining = complete ? 0 : phaseEnd - inCycle;
+    const workActive = running && isWork;
+    const restActive = running && !isWork && !complete;
 
+    elements.workSetting.classList.toggle("is-active", workActive);
+    elements.workSettingLabel.textContent = workActive ? "N1 · 運動中" : "N1 · WORK";
+    elements.restSetting.classList.toggle("is-active", restActive);
+    elements.restSettingLabel.textContent = restActive ? "N2 · 休息中" : "N2 · REST";
     elements.phasePanel.classList.toggle("is-work", isWork && (running || elapsedBeforeStart > 0));
     elements.phasePanel.classList.toggle("is-rest", !isWork && !complete);
     elements.phaseLabel.textContent = complete ? "COMPLETE" : running || elapsedBeforeStart > 0 ? (isWork ? "WORK" : "REST") : "READY";
