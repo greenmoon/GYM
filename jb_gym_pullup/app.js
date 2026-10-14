@@ -76,6 +76,7 @@
   let finished = false;
   let audioContext = null;
   let lastSecond = null;
+  let lastPhase = "ready";
 
   const n2Minutes = () => settings.n - settings.n1;
   const cycleSeconds = () => settings.n * 60;
@@ -93,6 +94,10 @@
 
   function currentElapsed(now = performance.now()) {
     return running ? elapsedBeforeStart + (now - startedAt) / 1000 : elapsedBeforeStart;
+  }
+
+  function phaseAtElapsed(elapsed) {
+    return elapsed % cycleSeconds() < workSeconds() ? "work" : "rest";
   }
 
   function getText() {
@@ -204,6 +209,9 @@
   function tick(now) {
     const elapsed = currentElapsed(now);
     if (elapsed >= totalSeconds()) return completeWorkout();
+    const phase = phaseAtElapsed(elapsed);
+    if (lastPhase === "rest" && phase === "work") playPhaseBeep();
+    lastPhase = phase;
     const second = Math.ceil(elapsed);
     if (second !== lastSecond) {
       lastSecond = second;
@@ -218,6 +226,20 @@
       if (AudioContext) audioContext = new AudioContext();
     }
     if (audioContext?.state === "suspended") audioContext.resume();
+  }
+
+  function playPhaseBeep() {
+    if (!audioContext) return;
+    const oscillator = audioContext.createOscillator();
+    const gain = audioContext.createGain();
+    const start = audioContext.currentTime;
+    oscillator.frequency.value = 880;
+    gain.gain.setValueAtTime(0.0001, start);
+    gain.gain.exponentialRampToValueAtTime(0.16, start + 0.01);
+    gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.13);
+    oscillator.connect(gain).connect(audioContext.destination);
+    oscillator.start(start);
+    oscillator.stop(start + 0.14);
   }
 
   function playDoneAlert() {
@@ -239,6 +261,7 @@
   function completeWorkout() {
     running = false;
     finished = true;
+    lastPhase = "complete";
     elapsedBeforeStart = totalSeconds();
     cancelAnimationFrame(animationFrame);
     render(totalSeconds());
@@ -260,8 +283,11 @@
       elements.startButton.classList.remove("is-running");
       render(elapsedBeforeStart);
     } else {
+      const startingFresh = elapsedBeforeStart === 0;
       running = true;
       startedAt = performance.now();
+      lastPhase = phaseAtElapsed(elapsedBeforeStart);
+      if (startingFresh) playPhaseBeep();
       elements.startButton.classList.add("is-running");
       animationFrame = requestAnimationFrame(tick);
     }
@@ -274,6 +300,7 @@
     finished = false;
     elapsedBeforeStart = 0;
     lastSecond = null;
+    lastPhase = "ready";
     cancelAnimationFrame(animationFrame);
     updateStartButton();
     elements.startButton.classList.remove("is-running");

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>QA Digest GYM Pull-up Progress EN-TC V12 2026.10.14 22:42</title>
+  <title>QA Digest GYM Pull-up Progress EN-TC V13 2026.10.14 23:04</title>
   <style>
     body { max-width: 1100px; margin: 40px auto; padding: 0 20px; color: #1f2937; font-family: system-ui, sans-serif; line-height: 1.55; }
     details { margin: 16px 0; padding: 14px 18px; border: 1px solid #d1d5db; border-radius: 10px; background: #f9fafb; }
@@ -18,6 +18,18 @@
 </head>
 <body>
   <h1>GYM Pull-up QA Digest Daily · English／繁體中文</h1>
+
+  <details>
+    <summary>(013 2026-10-14 23:04) Beep at workout start and rest-to-work transitions／開始及休息轉運動時發出嗶聲</summary>
+    <table>
+      <thead><tr><th>Item</th><th lang="en">English</th><th lang="zh-Hant">繁體中文</th></tr></thead>
+      <tbody>
+        <tr><th>Q</th><td lang="en">When should the Pull-up Trainer emit a short audible cue?</td><td lang="zh-Hant">Pull-up Trainer 應在什麼時候發出短促提示音？</td></tr>
+        <tr><th>A</th><td lang="en">Pull-up Trainer V12 emits one short beep on the initial Start press and whenever an N2 rest period transitions into the next N1 work period.</td><td lang="zh-Hant">Pull-up Trainer V12 在首次按下「開始」時嗶一聲，並在每次 N2 休息結束、轉入下一輪 N1 運動時再嗶一聲。</td></tr>
+        <tr><th>Check</th><td lang="en">A tracked phase state triggers the 880 Hz cue only for <code>rest → work</code>; pausing, resuming, and <code>work → rest</code> do not trigger it, while the existing completion alert remains unchanged.</td><td lang="zh-Hant">階段狀態僅在 <code>rest → work</code> 時觸發 880 Hz 提示音；暫停、繼續及 <code>work → rest</code> 不會觸發，既有完成提示音維持不變。</td></tr>
+      </tbody>
+    </table>
+  </details>
 
   <details>
     <summary>(012 2026-10-14 22:42) Add live Traditional Chinese and English modes／新增即時繁體中文與英文模式</summary>
@@ -163,6 +175,6 @@
     </table>
   </details>
 
-  <footer>QA Digest GYM Pull-up Progress EN-TC V12 2026.10.14 22:42</footer>
+  <footer>QA Digest GYM Pull-up Progress EN-TC V13 2026.10.14 23:04</footer>
 </body>
 </html>
