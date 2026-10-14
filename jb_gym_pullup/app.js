@@ -92,14 +92,14 @@
     elements.workSetting.classList.toggle("is-active", workActive);
     elements.workSettingLabel.textContent = workActive ? "N1 · 運動中" : "N1 · WORK";
     elements.restSetting.classList.toggle("is-active", restActive);
-    elements.restSettingLabel.textContent = restActive ? "N2 · 休息中" : "N2 · REST";
+    elements.restSettingLabel.textContent = restActive ? "N2 · 休息中" : "N2 · 休息";
     elements.phasePanel.classList.toggle("is-work", isWork && (running || elapsedBeforeStart > 0));
     elements.phasePanel.classList.toggle("is-rest", !isWork && !complete);
-    elements.phaseLabel.textContent = complete ? "COMPLETE" : running || elapsedBeforeStart > 0 ? (isWork ? "WORK" : "REST") : "READY";
+    elements.phaseLabel.textContent = complete ? "COMPLETE" : running || elapsedBeforeStart > 0 ? (isWork ? "WORK" : "休息") : "READY";
     elements.phaseTime.value = formatTime(phaseRemaining || (elapsedBeforeStart === 0 ? workSeconds() : 0));
     elements.splitLabel.textContent = isWork
       ? `N1 WORK ${formatMinutes(settings.n1)} MIN`
-      : `N2 REST ${formatMinutes(n2Minutes())} MIN`;
+      : `N2 休息 ${formatMinutes(n2Minutes())} MIN`;
     elements.totalTime.value = formatTime(totalSeconds() - bounded);
     elements.cycleLabel.textContent = `CYCLE ${cycleIndex + 1} / ${settings.m}`;
   }
