@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UKK GYM Progress TC V19 2026.10.08 19:26</title>
+  <title>UKK GYM Progress TC V21 2026.10.14 20:44</title>
   <style>
     body {
       max-width: 900px;
@@ -39,6 +39,30 @@
 </head>
 <body>
   <h1>GYM Unknown → Known Progress</h1>
+
+  <details>
+    <summary>(021 2026-10-14 20:44) 將 Pull-up Trainer 移至獨立子資料夾</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>新引體向上工具的程式碼與既有自行車首頁混放，會覆蓋原本的 GYM Bicycle 工具。</dd>
+      <dt>Known</dt>
+      <dd>Pull-up Trainer V01 的全部來源碼、圖示及 worker 已集中於 <code>jb_gym_pullup/</code>，根目錄則還原為原本的 Bicycle V10。</dd>
+      <dt>Evidence</dt>
+      <dd>兩個目錄可各自執行相對路徑的 <code>build.py</code>，並各自產生獨立的 <code>dist/</code> 建置輸出。</dd>
+    </dl>
+  </details>
+
+  <details>
+    <summary>(020 2026-10-14 20:43) 建立獨立版本的 N×M 引體向上間歇訓練器</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>如何在 iPhone 橫向單頁中清楚顯示可調整的引體向上運動、休息及總訓練倒數。</dd>
+      <dt>Known</dt>
+      <dd>獨立的 Pull-up Trainer 從 V01 開始，使用雙大型計時視窗，支援 N=1–7 分鐘、M=1–5 次，並將 N 拆分成可用 0.5 分鐘調整的 N1 運動及自動計算的 N2 休息。</dd>
+      <dt>Evidence</dt>
+      <dd>預設為 4×4、N1=2、N2=2，共 16 分鐘；設定範圍、循環切換、暫停、重設及完成提示均由本機 JavaScript 狀態機處理。</dd>
+    </dl>
+  </details>
 
   <details>
     <summary>(019 2026-10-08 19:26) 新增 MacBook 防睡眠縮寫</summary>
@@ -268,6 +292,6 @@
     </dl>
   </details>
 
-  <footer>UKK GYM Progress TC V19 2026.10.08 19:26</footer>
+  <footer>UKK GYM Progress TC V21 2026.10.14 20:44</footer>
 </body>
 </html>
