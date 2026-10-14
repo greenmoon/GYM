@@ -40,6 +40,7 @@ button { font: inherit; }
 .phase-panel.is-work .panel-label { color: var(--green); }
 .phase-panel.is-work .big-time { color: var(--work-red); }
 .phase-panel.is-rest .panel-label { color: var(--blue); }
+.phase-panel.is-rest .big-time { color: var(--rest-gray); }
 .big-time { color: var(--text); font-size: clamp(5.4rem,25vw,16rem); font-weight: 950; font-variant-numeric: tabular-nums; letter-spacing: -.08em; line-height: .9; }
 .secondary-time { color: var(--blue); font-size: clamp(4.8rem,21vw,14rem); }
 .panel-note { margin: 1vh 0 0; color: var(--muted); font-size: clamp(.72rem,1.8vw,1.2rem); font-weight: 850; letter-spacing: .12em; }

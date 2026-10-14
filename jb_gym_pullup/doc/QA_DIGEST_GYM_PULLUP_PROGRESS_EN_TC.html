@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>QA Digest GYM Pull-up Progress EN-TC V13 2026.10.14 23:04</title>
+  <title>QA Digest GYM Pull-up Progress EN-TC V14 2026.10.14 23:40</title>
   <style>
     body { max-width: 1100px; margin: 40px auto; padding: 0 20px; color: #1f2937; font-family: system-ui, sans-serif; line-height: 1.55; }
     details { margin: 16px 0; padding: 14px 18px; border: 1px solid #d1d5db; border-radius: 10px; background: #f9fafb; }
@@ -18,6 +18,18 @@
 </head>
 <body>
   <h1>GYM Pull-up QA Digest Daily · English／繁體中文</h1>
+
+  <details>
+    <summary>(014 2026-10-14 23:40) Show the large rest countdown in gray／大型休息倒數改為灰色</summary>
+    <table>
+      <thead><tr><th>Item</th><th lang="en">English</th><th lang="zh-Hant">繁體中文</th></tr></thead>
+      <tbody>
+        <tr><th>Q</th><td lang="en">How should the large countdown number visually distinguish the N2 rest phase from the N1 work phase?</td><td lang="zh-Hant">大型倒數數字應如何在視覺上區分 N2 休息階段與 N1 運動階段？</td></tr>
+        <tr><th>A</th><td lang="en">Pull-up Trainer V13 displays the large countdown in gray during N2 rest while preserving the red countdown during N1 work.</td><td lang="zh-Hant">Pull-up Trainer V13 在 N2 休息期間將大型倒數顯示為灰色，同時保留 N1 運動期間的紅色倒數。</td></tr>
+        <tr><th>Check</th><td lang="en"><code>.phase-panel.is-rest .big-time</code> now uses <code>--rest-gray</code>; the existing work selector continues to use <code>--work-red</code>.</td><td lang="zh-Hant"><code>.phase-panel.is-rest .big-time</code> 現在使用 <code>--rest-gray</code>；既有運動狀態選擇器仍使用 <code>--work-red</code>。</td></tr>
+      </tbody>
+    </table>
+  </details>
 
   <details>
     <summary>(013 2026-10-14 23:04) Beep at workout start and rest-to-work transitions／開始及休息轉運動時發出嗶聲</summary>
@@ -175,6 +187,6 @@
     </table>
   </details>
 
-  <footer>QA Digest GYM Pull-up Progress EN-TC V13 2026.10.14 23:04</footer>
+  <footer>QA Digest GYM Pull-up Progress EN-TC V14 2026.10.14 23:40</footer>
 </body>
 </html>
