@@ -9,67 +9,71 @@
   <meta name="apple-mobile-web-app-title" content="GYM Pull-up">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/gym-icon-180.png">
   <link rel="manifest" href="manifest.webmanifest">
-  <title>GYM Pull-up Trainer V10 2026.10.14 22:40</title>
+  <title>GYM Pull-up Trainer V11 2026.10.14 22:42</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="app" aria-labelledby="app-title">
     <header class="status-bar">
-      <h1 id="app-title">GYM Pull-up Trainer V10 2026.10.14 22:40 <span>· Created by Kevin</span></h1>
-      <strong id="formula" class="formula">4 × 4 = 16 MIN</strong>
+      <h1 id="app-title">GYM Pull-up Trainer V11 2026.10.14 22:42 <span id="creator-label">· Kevin 製作</span></h1>
+      <div class="language-switch" role="group" aria-label="語言 / Language">
+        <button id="lang-tc" class="language-button is-active" type="button" data-lang="tc" aria-pressed="true">繁體中文</button>
+        <button id="lang-en" class="language-button" type="button" data-lang="en" aria-pressed="false">English</button>
+      </div>
+      <strong id="formula" class="formula">4 × 4 = 16 分鐘</strong>
     </header>
 
     <section id="phase-panel" class="display-panel phase-panel" aria-label="目前階段倒數">
-      <p id="phase-label" class="panel-label">READY</p>
+      <p id="phase-label" class="panel-label">準備</p>
       <output id="phase-time" class="big-time" aria-live="polite">01:30</output>
-      <p id="split-label" class="panel-note">N1 運動中 1.5 MIN</p>
+      <p id="split-label" class="panel-note">N1 運動中 1.5 分鐘</p>
     </section>
 
     <section class="display-panel total-panel" aria-label="訓練總進度">
-      <p class="panel-label">TOTAL LEFT</p>
+      <p id="total-label" class="panel-label">剩餘總時間</p>
       <output id="total-time" class="big-time secondary-time" aria-live="polite">16:00</output>
-      <p id="cycle-label" class="panel-note">CYCLE 1 / 4</p>
+      <p id="cycle-label" class="panel-note">循環 1 / 4</p>
     </section>
 
     <section class="controls-panel" aria-label="訓練設定">
       <div class="setting" data-setting="n">
-        <span>N · CYCLE</span>
+        <span id="n-setting-label">N · 每循環</span>
         <button type="button" data-adjust="n" data-delta="-1" aria-label="減少每循環分鐘">−</button>
-        <output id="n-value">4</output><em>MIN</em>
+        <output id="n-value">4</output><em id="n-unit">分鐘</em>
         <button type="button" data-adjust="n" data-delta="1" aria-label="增加每循環分鐘">＋</button>
       </div>
       <div id="work-setting" class="setting work-setting" data-setting="n1">
         <span id="work-setting-label">N1 · 運動中</span>
         <button type="button" data-adjust="n1" data-delta="-0.5" aria-label="減少運動時間">−</button>
-        <output id="n1-value">1.5</output><em>MIN</em>
+        <output id="n1-value">1.5</output><em id="n1-unit">分鐘</em>
         <button type="button" data-adjust="n1" data-delta="0.5" aria-label="增加運動時間">＋</button>
       </div>
       <div id="rest-setting" class="setting fixed-setting rest-setting">
         <span id="rest-setting-label">N2 · 休息</span>
-        <output id="n2-value">2.5</output><em>MIN</em>
+        <output id="n2-value">2.5</output><em id="n2-unit">分鐘</em>
       </div>
       <div class="setting" data-setting="m">
-        <span>M · CYCLES</span>
+        <span id="m-setting-label">M · 循環次數</span>
         <button type="button" data-adjust="m" data-delta="-1" aria-label="減少循環次數">−</button>
         <output id="m-value">4</output><em>×</em>
         <button type="button" data-adjust="m" data-delta="1" aria-label="增加循環次數">＋</button>
       </div>
       <div class="button-row">
-        <button id="start-button" class="primary-button" type="button">START</button>
-        <button id="reset-button" class="secondary-button" type="button">RESET</button>
+        <button id="start-button" class="primary-button" type="button">開始</button>
+        <button id="reset-button" class="secondary-button" type="button">重設</button>
       </div>
     </section>
 
     <div id="done-overlay" class="done-overlay" role="alertdialog" aria-modal="true" aria-labelledby="done-title" hidden>
       <div class="done-card">
-        <p>運動完成</p>
-        <h2 id="done-title">DONE</h2>
-        <p id="done-summary">4 cycles · 16 minutes</p>
-        <button id="done-reset-button" class="primary-button" type="button">AGAIN</button>
+        <p id="done-message">運動完成</p>
+        <h2 id="done-title">完成</h2>
+        <p id="done-summary">4 個循環 · 16 分鐘</p>
+        <button id="done-reset-button" class="primary-button" type="button">再來一次</button>
       </div>
     </div>
 
-    <aside class="rotate-notice">請將 iPhone 轉為橫向</aside>
+    <aside id="rotate-notice" class="rotate-notice">請將 iPhone 轉為橫向</aside>
   </main>
   <script src="app.js"></script>
 </body>
