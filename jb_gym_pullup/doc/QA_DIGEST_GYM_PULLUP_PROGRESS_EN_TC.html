@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>QA Digest GYM Pull-up Progress EN-TC V14 2026.10.14 23:40</title>
+  <title>QA Digest GYM Pull-up Progress EN-TC V15 2026.10.15 16:05</title>
   <style>
     body { max-width: 1100px; margin: 40px auto; padding: 0 20px; color: #1f2937; font-family: system-ui, sans-serif; line-height: 1.55; }
     details { margin: 16px 0; padding: 14px 18px; border: 1px solid #d1d5db; border-radius: 10px; background: #f9fafb; }
@@ -18,6 +18,18 @@
 </head>
 <body>
   <h1>GYM Pull-up QA Digest Daily · English／繁體中文</h1>
+
+  <details>
+    <summary>(015 2026-10-15 16:05) Replace the phase beep with a cricket chirp／將階段嗶聲改為蟋蟀啁啾聲</summary>
+    <table>
+      <thead><tr><th>Item</th><th lang="en">English</th><th lang="zh-Hant">繁體中文</th></tr></thead>
+      <tbody>
+        <tr><th>Q</th><td lang="en">How can the workout-start and rest-to-work audio cue sound clearer than a single short beep?</td><td lang="zh-Hant">開始訓練及休息轉運動的聲音提示，如何比單一短嗶聲更清楚？</td></tr>
+        <tr><th>A</th><td lang="en">Pull-up Trainer V14 replaces the single 880 Hz beep with a distinct cricket-style chirp made of two clusters of three short pulses.</td><td lang="zh-Hant">Pull-up Trainer V14 將單一 880 Hz 嗶聲改為明顯的蟋蟀式啁啾，由兩組、每組三個短脈衝組成。</td></tr>
+        <tr><th>Check</th><td lang="en"><code>playCricketChirp()</code> schedules six triangle-wave pulses from 3.2–4.3 kHz at initial Start and every <code>rest → work</code> transition; pause, resume, <code>work → rest</code>, and the existing completion alert remain unchanged.</td><td lang="zh-Hant"><code>playCricketChirp()</code> 在首次開始及每次 <code>rest → work</code> 切換時排程六個 3.2–4.3 kHz 三角波脈衝；暫停、繼續、<code>work → rest</code> 與既有完成提示音均維持不變。</td></tr>
+      </tbody>
+    </table>
+  </details>
 
   <details>
     <summary>(014 2026-10-14 23:40) Show the large rest countdown in gray／大型休息倒數改為灰色</summary>
@@ -187,6 +199,6 @@
     </table>
   </details>
 
-  <footer>QA Digest GYM Pull-up Progress EN-TC V14 2026.10.14 23:40</footer>
+  <footer>QA Digest GYM Pull-up Progress EN-TC V15 2026.10.15 16:05</footer>
 </body>
 </html>

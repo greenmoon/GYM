@@ -210,7 +210,7 @@
     const elapsed = currentElapsed(now);
     if (elapsed >= totalSeconds()) return completeWorkout();
     const phase = phaseAtElapsed(elapsed);
-    if (lastPhase === "rest" && phase === "work") playPhaseBeep();
+    if (lastPhase === "rest" && phase === "work") playCricketChirp();
     lastPhase = phase;
     const second = Math.ceil(elapsed);
     if (second !== lastSecond) {
@@ -228,18 +228,23 @@
     if (audioContext?.state === "suspended") audioContext.resume();
   }
 
-  function playPhaseBeep() {
+  function playCricketChirp() {
     if (!audioContext) return;
-    const oscillator = audioContext.createOscillator();
-    const gain = audioContext.createGain();
     const start = audioContext.currentTime;
-    oscillator.frequency.value = 880;
-    gain.gain.setValueAtTime(0.0001, start);
-    gain.gain.exponentialRampToValueAtTime(0.16, start + 0.01);
-    gain.gain.exponentialRampToValueAtTime(0.0001, start + 0.13);
-    oscillator.connect(gain).connect(audioContext.destination);
-    oscillator.start(start);
-    oscillator.stop(start + 0.14);
+    [0, 0.065, 0.13, 0.245, 0.31, 0.375].forEach((delay, index) => {
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      const pulseStart = start + delay;
+      oscillator.type = "triangle";
+      oscillator.frequency.setValueAtTime(index % 3 === 1 ? 4300 : 3700, pulseStart);
+      oscillator.frequency.exponentialRampToValueAtTime(3200, pulseStart + 0.05);
+      gain.gain.setValueAtTime(0.0001, pulseStart);
+      gain.gain.exponentialRampToValueAtTime(0.14, pulseStart + 0.006);
+      gain.gain.exponentialRampToValueAtTime(0.0001, pulseStart + 0.05);
+      oscillator.connect(gain).connect(audioContext.destination);
+      oscillator.start(pulseStart);
+      oscillator.stop(pulseStart + 0.055);
+    });
   }
 
   function playDoneAlert() {
@@ -287,7 +292,7 @@
       running = true;
       startedAt = performance.now();
       lastPhase = phaseAtElapsed(elapsedBeforeStart);
-      if (startingFresh) playPhaseBeep();
+      if (startingFresh) playCricketChirp();
       elements.startButton.classList.add("is-running");
       animationFrame = requestAnimationFrame(tick);
     }
