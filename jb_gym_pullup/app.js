@@ -231,20 +231,32 @@
   function playCricketChirp() {
     if (!audioContext) return;
     const start = audioContext.currentTime;
-    [0, 0.065, 0.13, 0.245, 0.31, 0.375].forEach((delay, index) => {
-      const oscillator = audioContext.createOscillator();
-      const gain = audioContext.createGain();
-      const pulseStart = start + delay;
-      oscillator.type = "triangle";
-      oscillator.frequency.setValueAtTime(index % 3 === 1 ? 4300 : 3700, pulseStart);
-      oscillator.frequency.exponentialRampToValueAtTime(3200, pulseStart + 0.05);
-      gain.gain.setValueAtTime(0.0001, pulseStart);
-      gain.gain.exponentialRampToValueAtTime(0.14, pulseStart + 0.006);
-      gain.gain.exponentialRampToValueAtTime(0.0001, pulseStart + 0.05);
-      oscillator.connect(gain).connect(audioContext.destination);
-      oscillator.start(pulseStart);
-      oscillator.stop(pulseStart + 0.055);
-    });
+    const chirpDuration = 3;
+    const chirpEnd = start + chirpDuration;
+    const clusterSpacing = 0.4;
+    const pulseDuration = 0.05;
+    const pulseOffsets = [0, 0.055, 0.11, 0.165];
+    let pulseIndex = 0;
+
+    for (let clusterStart = 0; clusterStart < chirpDuration; clusterStart += clusterSpacing) {
+      pulseOffsets.forEach((offset) => {
+        const pulseStart = start + clusterStart + offset;
+        if (pulseStart >= chirpEnd) return;
+        const pulseEnd = Math.min(pulseStart + pulseDuration, chirpEnd);
+        const oscillator = audioContext.createOscillator();
+        const gain = audioContext.createGain();
+        oscillator.type = "triangle";
+        oscillator.frequency.setValueAtTime(pulseIndex % 4 === 1 ? 4300 : 3700, pulseStart);
+        oscillator.frequency.exponentialRampToValueAtTime(3200, pulseEnd);
+        gain.gain.setValueAtTime(0.0001, pulseStart);
+        gain.gain.exponentialRampToValueAtTime(0.14, Math.min(pulseStart + 0.006, pulseEnd));
+        gain.gain.exponentialRampToValueAtTime(0.0001, pulseEnd);
+        oscillator.connect(gain).connect(audioContext.destination);
+        oscillator.start(pulseStart);
+        oscillator.stop(pulseEnd);
+        pulseIndex += 1;
+      });
+    }
   }
 
   function playDoneAlert() {
