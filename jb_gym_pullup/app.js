@@ -9,7 +9,7 @@
       minute: "分鐘", ready: "準備", working: "運動中", rest: "休息", resting: "休息中", complete: "完成",
       totalLeft: "剩餘總時間", cycle: "循環", nCycle: "N · 每循環", mCycles: "M · 循環次數",
       start: "開始", pause: "暫停", resume: "繼續", reset: "重設", doneMessage: "運動完成", again: "再來一次",
-      rotate: "請將 iPhone 轉為橫向", phaseAria: "目前階段倒數", totalAria: "訓練總進度", controlsAria: "訓練設定",
+      rotate: "請將 iPhone 轉為橫向", currentTimeAria: "現在時間", phaseAria: "目前階段倒數", totalAria: "訓練總進度", controlsAria: "訓練設定",
       adjustAria: {
         "n:-1": "減少每循環分鐘", "n:1": "增加每循環分鐘",
         "n1:-0.5": "減少運動時間", "n1:0.5": "增加運動時間",
@@ -21,7 +21,7 @@
       minute: "MIN", ready: "READY", working: "WORK", rest: "REST", resting: "RESTING", complete: "COMPLETE",
       totalLeft: "TOTAL LEFT", cycle: "CYCLE", nCycle: "N · CYCLE", mCycles: "M · CYCLES",
       start: "START", pause: "PAUSE", resume: "RESUME", reset: "RESET", doneMessage: "WORKOUT COMPLETE", again: "AGAIN",
-      rotate: "Rotate iPhone to landscape", phaseAria: "Current phase countdown", totalAria: "Workout progress", controlsAria: "Workout settings",
+      rotate: "Rotate iPhone to landscape", currentTimeAria: "Current time", phaseAria: "Current phase countdown", totalAria: "Workout progress", controlsAria: "Workout settings",
       adjustAria: {
         "n:-1": "Decrease cycle minutes", "n:1": "Increase cycle minutes",
         "n1:-0.5": "Decrease work time", "n1:0.5": "Increase work time",
@@ -32,6 +32,7 @@
   const elements = {
     app: document.querySelector(".app"),
     creatorLabel: document.querySelector("#creator-label"),
+    currentTime: document.querySelector("#current-time"),
     languageSwitch: document.querySelector(".language-switch"),
     languageButtons: [...document.querySelectorAll("[data-lang]")],
     phasePanel: document.querySelector("#phase-panel"),
@@ -104,6 +105,15 @@
     return copy[language];
   }
 
+  function updateClock() {
+    const now = new Date();
+    elements.currentTime.dateTime = now.toISOString();
+    elements.currentTime.textContent = [now.getHours(), now.getMinutes(), now.getSeconds()]
+      .map((value) => String(value).padStart(2, "0"))
+      .join(":");
+    window.setTimeout(updateClock, 1000 - now.getMilliseconds());
+  }
+
   function updateStartButton() {
     const text = getText();
     elements.startButton.textContent = running ? text.pause : elapsedBeforeStart > 0 && !finished ? text.resume : text.start;
@@ -118,6 +128,7 @@
   function updateLanguage() {
     const text = getText();
     document.documentElement.lang = text.htmlLang;
+    elements.currentTime.setAttribute("aria-label", text.currentTimeAria);
     elements.languageSwitch.setAttribute("aria-label", text.languageAria);
     elements.languageButtons.forEach((button) => {
       const active = button.dataset.lang === language;
@@ -336,5 +347,6 @@
   document.addEventListener("visibilitychange", () => { if (!document.hidden && running) render(currentElapsed()); });
 
   window.GymTimer = { settings, n2Minutes, cycleSeconds, workSeconds, totalSeconds, formatTime, setLanguage, getLanguage: () => language };
+  updateClock();
   updateLanguage();
 })();

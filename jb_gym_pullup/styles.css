@@ -28,6 +28,7 @@ button { font: inherit; }
 .status-bar { grid-column: 1/-1; display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 30px; }
 .status-bar h1 { flex: 1; overflow: hidden; margin: 0; font-size: clamp(.64rem,1.45vw,1rem); text-overflow: ellipsis; white-space: nowrap; }
 .status-bar h1 span { color: var(--green); }
+.current-time { flex: none; min-width: 8ch; padding: 4px 9px; border: 1px solid rgba(101,255,156,.36); border-radius: 9px; background: rgba(101,255,156,.07); color: var(--text); font-size: clamp(.78rem,1.8vw,1.18rem); font-weight: 950; font-variant-numeric: tabular-nums; letter-spacing: .06em; line-height: 1; text-align: center; }
 .language-switch { display: flex; flex: none; gap: 4px; padding: 3px; border: 1px solid var(--line); border-radius: 10px; background: rgba(255,255,255,.035); }
 .language-button { min-height: 26px; padding: 3px 8px; border: 0; border-radius: 7px; background: transparent; color: var(--muted); font-size: clamp(.54rem,1.05vw,.72rem); font-weight: 900; white-space: nowrap; }
 .language-button.is-active { background: var(--green); color: #04100a; }
@@ -79,6 +80,7 @@ button:focus-visible { outline: 3px solid white; outline-offset: 2px; }
 }
 @media (max-height:430px) {
   .app { gap: 6px; }
+  .current-time { padding: 3px 7px; }
   .language-button { min-height: 24px; padding: 2px 6px; }
   .big-time { font-size: clamp(5rem,31vh,9rem); }
   .secondary-time { font-size: clamp(4.4rem,28vh,8rem); }
