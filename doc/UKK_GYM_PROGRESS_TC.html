@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UKK GYM Progress TC V23 2026.10.14 20:53</title>
+  <title>UKK GYM Progress TC V24 2026.10.20 21:01</title>
   <style>
     body {
       max-width: 900px;
@@ -39,6 +39,18 @@
 </head>
 <body>
   <h1>GYM Unknown → Known Progress</h1>
+
+  <details>
+    <summary>(024 2026-10-20 21:01) 將自行車循環調整為兩分鐘恢復與一分鐘休息</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>如何讓每個 5 分鐘自行車循環在峰值後有較長的 110→85 BPM 恢復，並保留最後的休息提示。</dd>
+      <dt>Known</dt>
+      <dd>Bicycle V11 每循環依序為 00:00–02:00 的 85→110 BPM、02:00–04:00 的 110→85 BPM，以及 04:00–05:00 的 59→0 秒 REST 倒數。</dd>
+      <dt>Evidence</dt>
+      <dd><code>RECOVERY_SECONDS</code> 已為 120，倒數從第 240 秒開始，並顯示 <code>REST · COUNTDOWN</code>。</dd>
+    </dl>
+  </details>
 
   <details>
     <summary>(023 2026-10-14 20:53) 建立 Pull-up、Fascia 與 Bike 的嚴格專案邊界</summary>
@@ -316,6 +328,6 @@
     </dl>
   </details>
 
-  <footer>UKK GYM Progress TC V23 2026.10.14 20:53</footer>
+  <footer>UKK GYM Progress TC V24 2026.10.20 21:01</footer>
 </body>
 </html>

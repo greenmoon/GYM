@@ -3,7 +3,7 @@
 
   const CYCLE_SECONDS = 300;
   const RISE_SECONDS = 120;
-  const RECOVERY_SECONDS = 60;
+  const RECOVERY_SECONDS = 120;
   const COUNTDOWN_START_SECONDS = RISE_SECONDS + RECOVERY_SECONDS;
   const MIN_BPM = 85;
   const MAX_BPM = 110;
@@ -104,7 +104,7 @@
     elements.progressFill.style.width = `${(cycleSecond / CYCLE_SECONDS) * 100}%`;
     elements.phaseLabel.textContent = finished
       ? "COMPLETE"
-      : `${running ? "RIDE" : "READY"} · ${isCountdown ? "COUNTDOWN" : cycleSecond <= RISE_SECONDS ? "RAMP UP" : "RECOVER"}`;
+      : `${running ? "RIDE" : "READY"} · ${isCountdown ? "REST · COUNTDOWN" : cycleSecond <= RISE_SECONDS ? "RAMP UP" : "RECOVER"}`;
   }
 
   function tick(now) {
