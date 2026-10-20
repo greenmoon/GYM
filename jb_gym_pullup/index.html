@@ -9,13 +9,13 @@
   <meta name="apple-mobile-web-app-title" content="GYM Pull-up">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/gym-icon-180.png">
   <link rel="manifest" href="manifest.webmanifest">
-  <title>GYM Pull-up Trainer V16 2026.10.18 09:49</title>
+  <title>GYM Pull-up Trainer V17 2026.10.20 09:51</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="app" aria-labelledby="app-title">
     <header class="status-bar">
-      <h1 id="app-title">GYM Pull-up Trainer V16 2026.10.18 09:49 <span id="creator-label">· Kevin 製作</span></h1>
+      <h1 id="app-title">GYM Pull-up Trainer V17 2026.10.20 09:51 <span id="creator-label">· Kevin 製作</span></h1>
       <time id="current-time" class="current-time" aria-label="現在時間">00:00:00</time>
       <div class="language-switch" role="group" aria-label="語言 / Language">
         <button id="lang-tc" class="language-button is-active" type="button" data-lang="tc" aria-pressed="true">繁體中文</button>
@@ -25,6 +25,10 @@
     </header>
 
     <section id="phase-panel" class="display-panel phase-panel" aria-label="目前階段倒數">
+      <div id="exercise-switch" class="exercise-switch" role="group" aria-label="運動模式">
+        <button class="exercise-button is-active" type="button" data-exercise="pullup" aria-pressed="true">PULL-UP</button>
+        <button class="exercise-button" type="button" data-exercise="squat" aria-pressed="false">SQUAT</button>
+      </div>
       <p id="phase-label" class="panel-label">準備</p>
       <output id="phase-time" class="big-time" aria-live="polite">01:30</output>
       <p id="split-label" class="panel-note">N1 運動中 1.5 分鐘</p>

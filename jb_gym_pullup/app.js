@@ -2,6 +2,10 @@
   "use strict";
 
   const settings = { n: 4, n1: 1.5, m: 4 };
+  const exercisePresets = {
+    pullup: { n: 4, n1: 1.5 },
+    squat: { n: 5, n1: 2.5 },
+  };
   const limits = { n: [1, 7], m: [1, 5] };
   const copy = {
     tc: {
@@ -9,7 +13,7 @@
       minute: "分鐘", ready: "準備", working: "運動中", rest: "休息", resting: "休息中", complete: "完成",
       totalLeft: "剩餘總時間", cycle: "循環", nCycle: "N · 每循環", mCycles: "M · 循環次數",
       start: "開始", pause: "暫停", resume: "繼續", reset: "重設", doneMessage: "運動完成", again: "再來一次",
-      rotate: "請將 iPhone 轉為橫向", currentTimeAria: "現在時間", phaseAria: "目前階段倒數", totalAria: "訓練總進度", controlsAria: "訓練設定",
+      rotate: "請將 iPhone 轉為橫向", currentTimeAria: "現在時間", exerciseAria: "運動模式", pullupAria: "引體向上模式", squatAria: "深蹲模式", phaseAria: "目前階段倒數", totalAria: "訓練總進度", controlsAria: "訓練設定",
       adjustAria: {
         "n:-1": "減少每循環分鐘", "n:1": "增加每循環分鐘",
         "n1:-0.5": "減少運動時間", "n1:0.5": "增加運動時間",
@@ -21,7 +25,7 @@
       minute: "MIN", ready: "READY", working: "WORK", rest: "REST", resting: "RESTING", complete: "COMPLETE",
       totalLeft: "TOTAL LEFT", cycle: "CYCLE", nCycle: "N · CYCLE", mCycles: "M · CYCLES",
       start: "START", pause: "PAUSE", resume: "RESUME", reset: "RESET", doneMessage: "WORKOUT COMPLETE", again: "AGAIN",
-      rotate: "Rotate iPhone to landscape", currentTimeAria: "Current time", phaseAria: "Current phase countdown", totalAria: "Workout progress", controlsAria: "Workout settings",
+      rotate: "Rotate iPhone to landscape", currentTimeAria: "Current time", exerciseAria: "Exercise mode", pullupAria: "Pull-up mode", squatAria: "Squat mode", phaseAria: "Current phase countdown", totalAria: "Workout progress", controlsAria: "Workout settings",
       adjustAria: {
         "n:-1": "Decrease cycle minutes", "n:1": "Increase cycle minutes",
         "n1:-0.5": "Decrease work time", "n1:0.5": "Increase work time",
@@ -35,6 +39,8 @@
     currentTime: document.querySelector("#current-time"),
     languageSwitch: document.querySelector(".language-switch"),
     languageButtons: [...document.querySelectorAll("[data-lang]")],
+    exerciseSwitch: document.querySelector("#exercise-switch"),
+    exerciseButtons: [...document.querySelectorAll("[data-exercise]")],
     phasePanel: document.querySelector("#phase-panel"),
     phaseLabel: document.querySelector("#phase-label"),
     phaseTime: document.querySelector("#phase-time"),
@@ -70,6 +76,7 @@
   };
 
   let language = "tc";
+  let exerciseMode = "pullup";
   let elapsedBeforeStart = 0;
   let startedAt = 0;
   let animationFrame = null;
@@ -135,6 +142,10 @@
       button.classList.toggle("is-active", active);
       button.setAttribute("aria-pressed", String(active));
     });
+    elements.exerciseSwitch.setAttribute("aria-label", text.exerciseAria);
+    elements.exerciseButtons.forEach((button) => {
+      button.setAttribute("aria-label", button.dataset.exercise === "pullup" ? text.pullupAria : text.squatAria);
+    });
     elements.creatorLabel.textContent = text.creator;
     elements.phasePanel.setAttribute("aria-label", text.phaseAria);
     elements.totalPanel.setAttribute("aria-label", text.totalAria);
@@ -167,12 +178,28 @@
 
   function updateSettings() {
     const text = getText();
+    const settingsLocked = running || elapsedBeforeStart > 0 || finished;
     elements.nValue.value = settings.n;
     elements.n1Value.value = formatMinutes(settings.n1);
     elements.n2Value.value = formatMinutes(n2Minutes());
     elements.mValue.value = settings.m;
     elements.formula.textContent = `${settings.n} × ${settings.m} = ${settings.n * settings.m} ${text.minute}`;
-    elements.adjustButtons.forEach((button) => { button.disabled = running || elapsedBeforeStart > 0 || finished; });
+    elements.adjustButtons.forEach((button) => { button.disabled = settingsLocked; });
+    elements.exerciseButtons.forEach((button) => {
+      const active = button.dataset.exercise === exerciseMode;
+      button.classList.toggle("is-active", active);
+      button.setAttribute("aria-pressed", String(active));
+      button.disabled = settingsLocked;
+    });
+  }
+
+  function setExerciseMode(nextMode) {
+    if (!exercisePresets[nextMode] || running || elapsedBeforeStart > 0 || finished) return;
+    exerciseMode = nextMode;
+    settings.n = exercisePresets[nextMode].n;
+    settings.n1 = exercisePresets[nextMode].n1;
+    updateSettings();
+    render(0);
   }
 
   function adjustSetting(name, delta) {
@@ -341,12 +368,13 @@
     adjustSetting(button.dataset.adjust, Number(button.dataset.delta));
   }));
   elements.languageButtons.forEach((button) => button.addEventListener("click", () => setLanguage(button.dataset.lang)));
+  elements.exerciseButtons.forEach((button) => button.addEventListener("click", () => setExerciseMode(button.dataset.exercise)));
   elements.startButton.addEventListener("click", toggleRunning);
   elements.resetButton.addEventListener("click", resetWorkout);
   elements.doneResetButton.addEventListener("click", resetWorkout);
   document.addEventListener("visibilitychange", () => { if (!document.hidden && running) render(currentElapsed()); });
 
-  window.GymTimer = { settings, n2Minutes, cycleSeconds, workSeconds, totalSeconds, formatTime, setLanguage, getLanguage: () => language };
+  window.GymTimer = { settings, n2Minutes, cycleSeconds, workSeconds, totalSeconds, formatTime, setLanguage, getLanguage: () => language, getExerciseMode: () => exerciseMode };
   updateClock();
   updateLanguage();
 })();

@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>QA Digest GYM Pull-up Progress EN-TC V17 2026.10.18 09:49</title>
+  <title>QA Digest GYM Pull-up Progress EN-TC V18 2026.10.20 09:51</title>
   <style>
     body { max-width: 1100px; margin: 40px auto; padding: 0 20px; color: #1f2937; font-family: system-ui, sans-serif; line-height: 1.55; }
     details { margin: 16px 0; padding: 14px 18px; border: 1px solid #d1d5db; border-radius: 10px; background: #f9fafb; }
@@ -18,6 +18,18 @@
 </head>
 <body>
   <h1>GYM Pull-up QA Digest Daily · English／繁體中文</h1>
+
+  <details>
+    <summary>(018 2026-10-20 09:51) Add Pull-up and Squat presets／新增引體向上與深蹲預設</summary>
+    <table>
+      <thead><tr><th>Item</th><th lang="en">English</th><th lang="zh-Hant">繁體中文</th></tr></thead>
+      <tbody>
+        <tr><th>Q</th><td lang="en">How can one timer provide dedicated Pull-up and Squat presets without changing the selected cycle count?</td><td lang="zh-Hant">同一個計時器如何提供引體向上與深蹲專用預設，同時不改變已選擇的循環次數？</td></tr>
+        <tr><th>A</th><td lang="en">Pull-up Trainer V17 adds PULL-UP and SQUAT controls. PULL-UP is the default with N=4 and N1=1.5; SQUAT loads N=5 and N1=2.5. Both calculate N2=2.5.</td><td lang="zh-Hant">Pull-up Trainer V17 新增 PULL-UP 與 SQUAT 控制。預設 PULL-UP 使用 N=4、N1=1.5；SQUAT 載入 N=5、N1=2.5；兩者皆計算出 N2=2.5。</td></tr>
+        <tr><th>Check</th><td lang="en">Switching before Start updates N, N1, N2, and total time while preserving M. Both mode controls lock after the workout starts and unlock only after Reset.</td><td lang="zh-Hant">開始前切換模式會更新 N、N1、N2 與總時間，同時保留 M；訓練開始後兩個模式控制會鎖定，直到按下重設才解鎖。</td></tr>
+      </tbody>
+    </table>
+  </details>
 
   <details>
     <summary>(017 2026-10-18 09:49) Add a live clock with seconds／新增顯示秒數的即時時鐘</summary>
@@ -223,6 +235,6 @@
     </table>
   </details>
 
-  <footer>QA Digest GYM Pull-up Progress EN-TC V17 2026.10.18 09:49</footer>
+  <footer>QA Digest GYM Pull-up Progress EN-TC V18 2026.10.20 09:51</footer>
 </body>
 </html>
