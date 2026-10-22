@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UKK GYM Progress TC V26 2026.10.22 17:18</title>
+  <title>UKK GYM Progress TC V27 2026.10.22 17:26</title>
   <style>
     body {
       max-width: 900px;
@@ -39,6 +39,18 @@
 </head>
 <body>
   <h1>GYM Unknown → Known Progress</h1>
+
+  <details>
+    <summary>(027 2026-10-22 17:26) 縮小直向 iPhone 的大型心率字體</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>直向 iPhone 畫面中的 85–110 BPM 是否需要保留較多空間給相位、控制與時鐘。</dd>
+      <dt>Known</dt>
+      <dd>Bicycle V14 將大型心率從 <code>clamp(9rem, 36vh, 18rem)</code> 調整為 <code>clamp(8rem, 32vh, 16rem)</code>，仍保持為頁面最大資訊，同時減少約 11% 的直向高度占用。</dd>
+      <dt>Evidence</dt>
+      <dd>只調整直向共用的 <code>.heart-rate</code> 字級與 V14 快取版本，不改變心率計算、色彩或循環控制。</dd>
+    </dl>
+  </details>
 
   <details>
     <summary>(026 2026-10-22 17:18) 將自行車頁面改為直向模式並加入即時時鐘</summary>
@@ -352,6 +364,6 @@
     </dl>
   </details>
 
-  <footer>UKK GYM Progress TC V26 2026.10.22 17:18</footer>
+  <footer>UKK GYM Progress TC V27 2026.10.22 17:26</footer>
 </body>
 </html>
