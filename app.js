@@ -21,6 +21,30 @@
     doneOverlay: document.querySelector("#done-overlay"),
     doneResetButton: document.querySelector("#done-reset-button"),
     doneSummary: document.querySelector("#done-summary"),
+    languageButtons: [...document.querySelectorAll(".language-button")],
+    cycleBadgeLabel: document.querySelector("#cycle-badge-label"),
+    cycleTimeLabel: document.querySelector("#cycle-time-label"),
+    maxCyclesLabel: document.querySelector("#max-cycles-label"),
+    cycleSelector: document.querySelector("#cycle-selector"),
+    doneEyebrow: document.querySelector("#done-eyebrow"),
+    rotateNotice: document.querySelector(".rotate-notice"),
+  };
+
+  const translations = {
+    tc: {
+      language: "語言", cycle: "循環", cycleTime: "循環時間", maxCycles: "最多循環",
+      targetRate: "目標心率", maxCyclesAria: "最多循環次數", start: "開始", pause: "暫停",
+      resume: "繼續", reset: "重設", again: "再來一次", complete: "運動完成",
+      rotate: "請將 iPhone 轉為橫向", ready: "準備", ride: "騎乘", ramp: "上升",
+      recover: "恢復", rest: "休息 · 倒數", completed: "完成", cycleOne: "循環", cycles: "循環", minutes: "分鐘",
+    },
+    en: {
+      language: "Language", cycle: "Cycle", cycleTime: "Cycle time", maxCycles: "Max cycles",
+      targetRate: "Target heart rate", maxCyclesAria: "Maximum workout cycles", start: "START", pause: "PAUSE",
+      resume: "RESUME", reset: "RESET", again: "AGAIN", complete: "WORKOUT COMPLETE",
+      rotate: "Rotate iPhone to landscape", ready: "READY", ride: "RIDE", ramp: "RAMP UP",
+      recover: "RECOVER", rest: "REST · COUNTDOWN", completed: "COMPLETE", cycleOne: "cycle", cycles: "cycles", minutes: "minutes",
+    },
   };
 
   let elapsedBeforeStart = 0;
@@ -30,6 +54,42 @@
   let finished = false;
   let maxCycles = 2;
   let audioContext = null;
+  let language = "tc";
+
+  function text(key) {
+    return translations[language][key];
+  }
+
+  function actionLabel() {
+    if (running) return text("pause");
+    return elapsedBeforeStart > 0 ? text("resume") : text("start");
+  }
+
+  function updateLanguage() {
+    document.documentElement.lang = language === "tc" ? "zh-Hant" : "en";
+    document.querySelector(".language-switcher").setAttribute("aria-label", text("language"));
+    document.querySelector(".heart-panel").setAttribute("aria-label", text("targetRate"));
+    elements.cycleSelector.setAttribute("aria-label", text("maxCyclesAria"));
+    elements.cycleBadgeLabel.textContent = text("cycle");
+    elements.cycleTimeLabel.textContent = text("cycleTime");
+    elements.maxCyclesLabel.textContent = text("maxCycles");
+    elements.resetButton.textContent = text("reset");
+    elements.doneEyebrow.textContent = text("complete");
+    elements.doneResetButton.textContent = text("again");
+    elements.rotateNotice.textContent = text("rotate");
+    elements.languageButtons.forEach((button) => {
+      const selected = button.dataset.language === language;
+      button.classList.toggle("is-selected", selected);
+      button.setAttribute("aria-pressed", String(selected));
+    });
+    elements.startButton.textContent = actionLabel();
+    render(currentElapsed());
+  }
+
+  function selectLanguage(nextLanguage) {
+    language = nextLanguage;
+    updateLanguage();
+  }
 
   function targetBpm(cycleSecond) {
     if (cycleSecond <= RISE_SECONDS) {
@@ -103,8 +163,8 @@
     elements.cycleTime.value = `${formatTime(cycleSecond)} / 05:00`;
     elements.progressFill.style.width = `${(cycleSecond / CYCLE_SECONDS) * 100}%`;
     elements.phaseLabel.textContent = finished
-      ? "COMPLETE"
-      : `${running ? "RIDE" : "READY"} · ${isCountdown ? "REST · COUNTDOWN" : cycleSecond <= RISE_SECONDS ? "RAMP UP" : "RECOVER"}`;
+      ? text("completed")
+      : `${running ? text("ride") : text("ready")} · ${isCountdown ? text("rest") : cycleSecond <= RISE_SECONDS ? text("ramp") : text("recover")}`;
   }
 
   function tick(now) {
@@ -150,9 +210,9 @@
     elapsedBeforeStart = totalSeconds();
     cancelAnimationFrame(animationFrame);
     render(totalSeconds());
-    elements.startButton.textContent = "START";
+    elements.startButton.textContent = text("start");
     elements.startButton.classList.remove("is-running");
-    elements.doneSummary.textContent = `${maxCycles} ${maxCycles === 1 ? "cycle" : "cycles"} · ${maxCycles * 5} minutes`;
+    elements.doneSummary.textContent = `${maxCycles} ${maxCycles === 1 ? text("cycleOne") : text("cycles")} · ${maxCycles * 5} ${text("minutes")}`;
     elements.doneOverlay.hidden = false;
     updateCycleControls();
     playDoneAlert();
@@ -166,7 +226,7 @@
       elapsedBeforeStart = currentElapsed();
       running = false;
       cancelAnimationFrame(animationFrame);
-      elements.startButton.textContent = "RESUME";
+      elements.startButton.textContent = text("resume");
       elements.startButton.classList.remove("is-running");
       render(elapsedBeforeStart);
       updateCycleControls();
@@ -175,7 +235,7 @@
 
     running = true;
     startedAt = performance.now();
-    elements.startButton.textContent = "PAUSE";
+    elements.startButton.textContent = text("pause");
     elements.startButton.classList.add("is-running");
     updateCycleControls();
     animationFrame = requestAnimationFrame(tick);
@@ -186,7 +246,7 @@
     finished = false;
     elapsedBeforeStart = 0;
     cancelAnimationFrame(animationFrame);
-    elements.startButton.textContent = "START";
+    elements.startButton.textContent = text("start");
     elements.startButton.classList.remove("is-running");
     elements.doneOverlay.hidden = true;
     updateCycleControls();
@@ -198,6 +258,9 @@
   elements.doneResetButton.addEventListener("click", resetWorkout);
   elements.cycleOptions.forEach((option) => {
     option.addEventListener("click", () => selectCycles(Number(option.dataset.cycles)));
+  });
+  elements.languageButtons.forEach((button) => {
+    button.addEventListener("click", () => selectLanguage(button.dataset.language));
   });
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden && running) render(currentElapsed());
@@ -212,5 +275,5 @@
   };
 
   updateCycleControls();
-  render(0);
+  updateLanguage();
 })();

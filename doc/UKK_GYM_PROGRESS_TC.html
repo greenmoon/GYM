@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UKK GYM Progress TC V24 2026.10.20 21:01</title>
+  <title>UKK GYM Progress TC V25 2026.10.22 17:06</title>
   <style>
     body {
       max-width: 900px;
@@ -39,6 +39,18 @@
 </head>
 <body>
   <h1>GYM Unknown → Known Progress</h1>
+
+  <details>
+    <summary>(025 2026-10-22 17:06) 新增繁中與英文介面切換</summary>
+    <dl>
+      <dt>Unknown</dt>
+      <dd>如何讓自行車頁面在不改變既有計時與循環邏輯下，提供頂端繁中與英文切換，並預設顯示繁體中文。</dd>
+      <dt>Known</dt>
+      <dd>Bicycle V12 已在頂端加入 TC 與 EN 按鈕，預設 TC；所有互動文字、狀態、完成提示與橫向提醒皆會即時切換。</dd>
+      <dt>Evidence</dt>
+      <dd><code>app.js</code> 使用 <code>translations</code> 字典與 <code>updateLanguage()</code> 重新渲染標籤，不影響 85→110→85 BPM 與休息倒數的時間計算。</dd>
+    </dl>
+  </details>
 
   <details>
     <summary>(024 2026-10-20 21:01) 將自行車循環調整為兩分鐘恢復與一分鐘休息</summary>
@@ -328,6 +340,6 @@
     </dl>
   </details>
 
-  <footer>UKK GYM Progress TC V24 2026.10.20 21:01</footer>
+  <footer>UKK GYM Progress TC V25 2026.10.22 17:06</footer>
 </body>
 </html>

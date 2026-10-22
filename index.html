@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="zh-Hant">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -9,31 +9,37 @@
   <meta name="apple-mobile-web-app-title" content="GYM">
   <link rel="apple-touch-icon" sizes="180x180" href="assets/gym-icon-180.png">
   <link rel="manifest" href="manifest.webmanifest">
-  <title>GYM Bicycle Heart Rate V11 2026.10.20 21:01</title>
+  <title>GYM Bicycle Heart Rate V12 2026.10.22 17:06</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <main class="app" aria-labelledby="app-title">
     <header class="status-bar">
-      <h1 id="app-title" class="title-line">GYM Bicycle Heart Rate V11 2026.10.20 21:01 <span>· Created by Kevin</span></h1>
-      <div class="cycle-badge" aria-live="polite">
-        <span>Cycle</span>
+      <h1 id="app-title" class="title-line">GYM Bicycle Heart Rate V12 2026.10.22 17:06 <span>· Created by Kevin</span></h1>
+      <div class="header-actions">
+        <div class="language-switcher" role="group" aria-label="Language">
+          <button class="language-button is-selected" type="button" data-language="tc" aria-pressed="true">TC</button>
+          <button class="language-button" type="button" data-language="en" aria-pressed="false">EN</button>
+        </div>
+        <div class="cycle-badge" aria-live="polite">
+        <span id="cycle-badge-label">循環</span>
         <strong id="cycle-count">1 / 3</strong>
+        </div>
       </div>
     </header>
 
-    <section class="heart-panel" aria-label="Target heart rate">
+    <section class="heart-panel" aria-label="目標心率">
       <div class="heart-mark" aria-hidden="true">♥</div>
       <div class="rate-wrap">
         <output id="heart-rate" class="heart-rate" aria-live="polite">85</output>
         <span id="rate-unit" class="unit">BPM</span>
       </div>
-      <p id="phase-label" class="phase-label">READY · RAMP UP</p>
+      <p id="phase-label" class="phase-label">準備 · 上升</p>
     </section>
 
     <section class="controls-panel">
       <div class="time-block">
-        <span class="time-label">Cycle time</span>
+        <span id="cycle-time-label" class="time-label">循環時間</span>
         <output id="cycle-time" class="time-value">00:00 / 05:00</output>
       </div>
 
@@ -43,12 +49,12 @@
       </div>
 
       <div class="button-row">
-        <button id="start-button" class="primary-button" type="button">START</button>
-        <button id="reset-button" class="secondary-button" type="button">RESET</button>
+        <button id="start-button" class="primary-button" type="button">開始</button>
+        <button id="reset-button" class="secondary-button" type="button">重設</button>
       </div>
 
-      <div class="cycle-selector" role="group" aria-label="Maximum workout cycles">
-        <span class="time-label">Max cycles</span>
+      <div id="cycle-selector" class="cycle-selector" role="group" aria-label="最多循環次數">
+        <span id="max-cycles-label" class="time-label">最多循環</span>
         <div class="cycle-options">
           <button class="cycle-option" type="button" data-cycles="1" aria-pressed="false">C1</button>
           <button class="cycle-option is-selected" type="button" data-cycles="2" aria-pressed="true">C2</button>
@@ -59,15 +65,15 @@
 
     <div id="done-overlay" class="done-overlay" role="alertdialog" aria-modal="true" aria-labelledby="done-title" hidden>
       <div class="done-card">
-        <p class="eyebrow">WORKOUT COMPLETE</p>
+        <p id="done-eyebrow" class="eyebrow">運動完成</p>
         <h2 id="done-title">DONE</h2>
         <p id="done-summary">2 cycles · 10 minutes</p>
-        <button id="done-reset-button" class="primary-button" type="button">AGAIN</button>
+        <button id="done-reset-button" class="primary-button" type="button">再來一次</button>
       </div>
     </div>
 
     <aside class="rotate-notice" aria-live="polite">
-      Rotate iPhone to landscape
+      請將 iPhone 轉為橫向
     </aside>
   </main>
 

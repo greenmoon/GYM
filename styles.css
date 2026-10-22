@@ -59,6 +59,40 @@ button {
   min-height: 52px;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.language-switcher {
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.language-button {
+  min-width: 42px;
+  min-height: 32px;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+}
+
+.language-button.is-selected {
+  background: var(--green);
+  color: #06110c;
+}
+
 .eyebrow,
 .status-bar h1 {
   margin: 0;
@@ -286,7 +320,8 @@ button {
 
 .primary-button:focus-visible,
 .secondary-button:focus-visible,
-.cycle-option:focus-visible {
+.cycle-option:focus-visible,
+.language-button:focus-visible {
   outline: 3px solid white;
   outline-offset: 3px;
 }
@@ -374,6 +409,19 @@ button {
   .status-bar .title-line {
     display: block;
     font-size: clamp(0.7rem, 1.65vw, 0.92rem);
+  }
+
+  .header-actions {
+    gap: 6px;
+  }
+
+  .language-button {
+    min-width: 36px;
+    min-height: 28px;
+  }
+
+  .cycle-badge {
+    padding: 6px 10px;
   }
 
   .heart-rate {
