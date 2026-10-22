@@ -172,15 +172,16 @@ button {
 
 .rate-wrap {
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
   line-height: 0.78;
 }
 
 .heart-rate {
-  min-width: 2.25ch;
+  min-width: 3ch;
   color: var(--rate-color);
-  font-size: clamp(8rem, 32vh, 16rem);
+  font-size: clamp(7rem, min(27vh, 46vw), 14rem);
   font-weight: 900;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.09em;
@@ -190,9 +191,9 @@ button {
 }
 
 .unit {
-  margin: 0 0 3vh 1vw;
+  margin: 16px 0 0;
   color: var(--muted);
-  font-size: clamp(0.8rem, 2.2vw, 1.45rem);
+  font-size: clamp(0.8rem, 4vw, 1.2rem);
   font-weight: 800;
   letter-spacing: 0.12em;
 }
