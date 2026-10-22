@@ -37,9 +37,9 @@ button {
 .app {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 34vw);
-  grid-template-rows: auto minmax(0, 1fr);
-  gap: clamp(10px, 2vw, 26px);
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  gap: clamp(8px, 1.5vh, 16px);
   width: 100vw;
   height: 100svh;
   padding: max(14px, env(safe-area-inset-top))
@@ -52,11 +52,14 @@ button {
 }
 
 .status-bar {
-  grid-column: 1 / -1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-height: 52px;
+}
+
+.title-stack {
+  min-width: 0;
 }
 
 .header-actions {
@@ -114,6 +117,16 @@ button {
   white-space: nowrap;
 }
 
+.current-time {
+  display: block;
+  margin-top: 4px;
+  color: var(--muted);
+  font-size: clamp(0.68rem, 2.7vw, 0.9rem);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+}
+
 .title-line span {
   color: var(--green);
 }
@@ -167,7 +180,7 @@ button {
 .heart-rate {
   min-width: 2.25ch;
   color: var(--rate-color);
-  font-size: clamp(9rem, 47vh, 32rem);
+  font-size: clamp(9rem, 36vh, 18rem);
   font-weight: 900;
   font-variant-numeric: tabular-nums;
   letter-spacing: -0.09em;
@@ -197,8 +210,8 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: clamp(14px, 3vh, 28px);
-  padding: clamp(16px, 3vw, 30px);
+  gap: clamp(10px, 2vh, 18px);
+  padding: clamp(14px, 4vw, 24px);
   border: 1px solid var(--line);
   border-radius: clamp(18px, 3vw, 34px);
   background: rgba(13, 29, 24, 0.72);
@@ -367,42 +380,23 @@ button {
   width: 100%;
 }
 
-.rotate-notice {
-  display: none;
-}
-
 @keyframes beat {
   0%, 100% { transform: scale(0.92); }
   18% { transform: scale(1.08); }
   36% { transform: scale(0.96); }
 }
 
-@media (orientation: portrait) and (max-width: 700px) {
-  .app > :not(.rotate-notice) {
-    visibility: hidden;
-  }
-
-  .rotate-notice {
-    position: fixed;
-    inset: 0;
-    display: grid;
-    place-items: center;
-    padding: 32px;
-    color: var(--green);
-    font-size: clamp(1.5rem, 8vw, 2.4rem);
-    font-weight: 900;
-    text-align: center;
-  }
-}
-
 @media (max-height: 420px) {
   .app {
+    grid-template-columns: minmax(0, 1fr) minmax(250px, 34vw);
+    grid-template-rows: auto minmax(0, 1fr);
     gap: 8px;
     padding-top: max(8px, env(safe-area-inset-top));
     padding-bottom: max(8px, env(safe-area-inset-bottom));
   }
 
   .status-bar {
+    grid-column: 1 / -1;
     min-height: 38px;
   }
 
@@ -425,7 +419,7 @@ button {
   }
 
   .heart-rate {
-    font-size: clamp(7rem, 48vh, 13rem);
+    font-size: clamp(7rem, 43vh, 13rem);
   }
 
   .controls-panel {

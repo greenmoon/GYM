@@ -27,7 +27,7 @@
     maxCyclesLabel: document.querySelector("#max-cycles-label"),
     cycleSelector: document.querySelector("#cycle-selector"),
     doneEyebrow: document.querySelector("#done-eyebrow"),
-    rotateNotice: document.querySelector(".rotate-notice"),
+    currentTime: document.querySelector("#current-time"),
   };
 
   const translations = {
@@ -35,14 +35,14 @@
       language: "語言", cycle: "循環", cycleTime: "循環時間", maxCycles: "最多循環",
       targetRate: "目標心率", maxCyclesAria: "最多循環次數", start: "開始", pause: "暫停",
       resume: "繼續", reset: "重設", again: "再來一次", complete: "運動完成",
-      rotate: "請將 iPhone 轉為橫向", ready: "準備", ride: "騎乘", ramp: "上升",
+      ready: "準備", ride: "騎乘", ramp: "上升",
       recover: "恢復", rest: "休息 · 倒數", completed: "完成", cycleOne: "循環", cycles: "循環", minutes: "分鐘",
     },
     en: {
       language: "Language", cycle: "Cycle", cycleTime: "Cycle time", maxCycles: "Max cycles",
       targetRate: "Target heart rate", maxCyclesAria: "Maximum workout cycles", start: "START", pause: "PAUSE",
       resume: "RESUME", reset: "RESET", again: "AGAIN", complete: "WORKOUT COMPLETE",
-      rotate: "Rotate iPhone to landscape", ready: "READY", ride: "RIDE", ramp: "RAMP UP",
+      ready: "READY", ride: "RIDE", ramp: "RAMP UP",
       recover: "RECOVER", rest: "REST · COUNTDOWN", completed: "COMPLETE", cycleOne: "cycle", cycles: "cycles", minutes: "minutes",
     },
   };
@@ -65,6 +65,16 @@
     return elapsedBeforeStart > 0 ? text("resume") : text("start");
   }
 
+  function updateCurrentTime() {
+    const now = new Date();
+    const date = [now.getFullYear(), now.getMonth() + 1, now.getDate()]
+      .map((value) => String(value).padStart(2, "0"));
+    const time = [now.getHours(), now.getMinutes(), now.getSeconds()]
+      .map((value) => String(value).padStart(2, "0"));
+    elements.currentTime.dateTime = now.toISOString();
+    elements.currentTime.textContent = `${date.join(":")} ${time.join(":")}`;
+  }
+
   function updateLanguage() {
     document.documentElement.lang = language === "tc" ? "zh-Hant" : "en";
     document.querySelector(".language-switcher").setAttribute("aria-label", text("language"));
@@ -76,7 +86,6 @@
     elements.resetButton.textContent = text("reset");
     elements.doneEyebrow.textContent = text("complete");
     elements.doneResetButton.textContent = text("again");
-    elements.rotateNotice.textContent = text("rotate");
     elements.languageButtons.forEach((button) => {
       const selected = button.dataset.language === language;
       button.classList.toggle("is-selected", selected);
@@ -276,4 +285,6 @@
 
   updateCycleControls();
   updateLanguage();
+  updateCurrentTime();
+  window.setInterval(updateCurrentTime, 1000);
 })();
