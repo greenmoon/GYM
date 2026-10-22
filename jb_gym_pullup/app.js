@@ -1,9 +1,9 @@
 (() => {
   "use strict";
 
-  const settings = { n: 4, n1: 1.5, m: 4 };
+  const settings = { n: 4, n1: 2, m: 4 };
   const exercisePresets = {
-    pullup: { n: 4, n1: 1.5 },
+    pullup: { n: 4, n1: 2 },
     squat: { n: 5, n1: 2.5 },
   };
   const limits = { n: [1, 7], m: [1, 5] };
