@@ -48,7 +48,7 @@
       <dt>Known</dt>
       <dd>Bicycle V12 已在頂端加入 TC 與 EN 按鈕，預設 TC；所有互動文字、狀態、完成提示與橫向提醒皆會即時切換。</dd>
       <dt>Evidence</dt>
-      <dd><code>app.js</code> 使用 <code>translations</code> 字典與 <code>updateLanguage()</code> 重新渲染標籤，不影響 85→110→85 BPM 與休息倒數的時間計算。</dd>
+      <dd><code>app.js</code> 使用 <code>translations</code> 字典與 <code>updateLanguage()</code> 重新渲染標籤；V12 的 CSS 與 JavaScript 加入版本查詢參數，避免舊快取阻擋切換功能，不影響 85→110→85 BPM 與休息倒數的時間計算。</dd>
     </dl>
   </details>
 
