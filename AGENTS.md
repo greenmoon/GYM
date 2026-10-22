@@ -10,14 +10,14 @@ For every user request, the first step is to read and follow this `AGENTS.md` fi
 This repository is the active GYM project:
 
 ```text
-/Users/kevinwei/Dropbox/0DownLoad/codex_on_GYM_project
+/Users/kevinwei/Dropbox/0DownLoad/codex_on_GYM_bike_project
 ```
 
 For every GYM-project shell command:
 
-1. Set the command `workdir` to `/Users/kevinwei/Dropbox/0DownLoad/codex_on_GYM_project` when the tool supports it.
+1. Set the command `workdir` to `/Users/kevinwei/Dropbox/0DownLoad/codex_on_GYM_bike_project` when the tool supports it.
 2. Verify the working directory with `pwd` when starting or resuming work.
-3. If a shell ignores its requested `workdir`, begin the command with `cd /Users/kevinwei/Dropbox/0DownLoad/codex_on_GYM_project`.
+3. If a shell ignores its requested `workdir`, begin the command with `cd /Users/kevinwei/Dropbox/0DownLoad/codex_on_GYM_bike_project`.
 4. Keep source-code paths relative to the repository after the shell is aligned.
 5. Do not read, edit, generate, or test files in other projects unless the user explicitly requests it.
 6. If the Codex task's inherited default `pwd` points elsewhere, treat it as untrusted and realign each command explicitly.

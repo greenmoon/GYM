@@ -1,6 +1,6 @@
 {
-  "name": "GYM fascia",
-  "short_name": "GYM fascia",
+  "name": "GYM bike",
+  "short_name": "GYM bike",
   "start_url": "./",
   "display": "standalone",
   "background_color": "#07110e",
