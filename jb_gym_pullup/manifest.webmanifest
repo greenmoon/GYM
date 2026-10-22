@@ -3,6 +3,7 @@
   "short_name": "GYM",
   "start_url": "./",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#07110e",
   "theme_color": "#07110e",
   "icons": [

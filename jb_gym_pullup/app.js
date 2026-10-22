@@ -13,7 +13,7 @@
       minute: "分鐘", ready: "準備", working: "運動中", rest: "休息", resting: "休息中", complete: "完成",
       totalLeft: "剩餘總時間", cycle: "循環", nCycle: "N · 每循環", mCycles: "M · 循環次數",
       start: "開始", pause: "暫停", resume: "繼續", reset: "重設", doneMessage: "運動完成", again: "再來一次",
-      rotate: "請將 iPhone 轉為橫向", currentTimeAria: "現在時間", exerciseAria: "運動模式", pullupAria: "引體向上模式", squatAria: "深蹲模式", phaseAria: "目前階段倒數", totalAria: "訓練總進度", controlsAria: "訓練設定",
+      currentTimeAria: "現在時間", exerciseAria: "運動模式", pullupAria: "引體向上模式", squatAria: "深蹲模式", phaseAria: "目前階段倒數", totalAria: "訓練總進度", controlsAria: "訓練設定",
       adjustAria: {
         "n:-1": "減少每循環分鐘", "n:1": "增加每循環分鐘",
         "n1:-0.5": "減少運動時間", "n1:0.5": "增加運動時間",
@@ -25,7 +25,7 @@
       minute: "MIN", ready: "READY", working: "WORK", rest: "REST", resting: "RESTING", complete: "COMPLETE",
       totalLeft: "TOTAL LEFT", cycle: "CYCLE", nCycle: "N · CYCLE", mCycles: "M · CYCLES",
       start: "START", pause: "PAUSE", resume: "RESUME", reset: "RESET", doneMessage: "WORKOUT COMPLETE", again: "AGAIN",
-      rotate: "Rotate iPhone to landscape", currentTimeAria: "Current time", exerciseAria: "Exercise mode", pullupAria: "Pull-up mode", squatAria: "Squat mode", phaseAria: "Current phase countdown", totalAria: "Workout progress", controlsAria: "Workout settings",
+      currentTimeAria: "Current time", exerciseAria: "Exercise mode", pullupAria: "Pull-up mode", squatAria: "Squat mode", phaseAria: "Current phase countdown", totalAria: "Workout progress", controlsAria: "Workout settings",
       adjustAria: {
         "n:-1": "Decrease cycle minutes", "n:1": "Increase cycle minutes",
         "n1:-0.5": "Decrease work time", "n1:0.5": "Increase work time",
@@ -72,7 +72,6 @@
     doneMessage: document.querySelector("#done-message"),
     doneTitle: document.querySelector("#done-title"),
     doneSummary: document.querySelector("#done-summary"),
-    rotateNotice: document.querySelector("#rotate-notice"),
   };
 
   let language = "tc";
@@ -160,7 +159,6 @@
     elements.doneMessage.textContent = text.doneMessage;
     elements.doneTitle.textContent = text.complete;
     elements.doneResetButton.textContent = text.again;
-    elements.rotateNotice.textContent = text.rotate;
     elements.adjustButtons.forEach((button) => {
       button.setAttribute("aria-label", text.adjustAria[`${button.dataset.adjust}:${button.dataset.delta}`]);
     });
